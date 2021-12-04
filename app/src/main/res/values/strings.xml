@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="app_name">EUS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone">Số Điện Thoại</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="Login">Đăng Nhập</string>
+    <string name="google">Google</string>
+    <string name="Register">Đăng Ký</string>
+    <string name="Forget">Quên mật </string>
+    <string name="OTP">Nhập OTP </string>
+    <string name="Confirm">Xác </string>
+    <string name="New_Password">Nhập mật khẩu </string>
+    <string name="New_Password_again">Nhập lại mật </string>
+    <string name="DefaultButton">Button</string>
+    <string name="two">Two</string>
+    <string name="one">One</string>
+    <string name="nameDefault">Thánh Bú Liếm</string>
+    <string name="DefaultMail">....@gmail.com</string>
+
+</resources>

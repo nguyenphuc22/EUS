@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.eus.ViewLogin.LoginFragment"
+        android:label="@string/Login"
+        tools:layout="@layout/fragment_login"
+        >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetFragment"
+            app:destination="@id/forgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.eus.ViewRegister.RegisterFragment"
+        android:label="@string/Register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/forgetFragment"
+        android:name="com.example.eus.ViewForget.ForgetFragment"
+        android:label="@string/Forget"
+        tools:layout="@layout/fragment_forget" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.eus.ViewProfile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
