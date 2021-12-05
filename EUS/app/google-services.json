@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285866575552",
+    "firebase_url": "https://eus-107fd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "eus-107fd",
+    "storage_bucket": "eus-107fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285866575552:android:620f29ced496b98b228f25",
+        "android_client_info": {
+          "package_name": "com.example.eus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285866575552-gam6593ttg4jl9ca01hj2qs1t9qns1vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eus",
+            "certificate_hash": "f8484248a45cd30600b17da7a9f47fe7e673fe55"
+          }
+        },
+        {
+          "client_id": "285866575552-d1i16nr90kbr5aqc84hfj6rb5eu1l6no.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrj67S2ZbCUQl-XHub5R-MS5VPxwXaJY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285866575552-d1i16nr90kbr5aqc84hfj6rb5eu1l6no.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
