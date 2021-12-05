@@ -43,9 +43,22 @@ class LoginFragment : Fragment() {
             Navigation.findNavController(binding.itemLogin.btnFoget).navigate(R.id.action_loginFragment_to_forgetFragment)
         }
 
+        binding.itemLogin.btnLoginGoogle.setOnClickListener {
+
+            if(viewModel.loginGoogle() != null) {
+
+                Toast.makeText(context,"Sucess",Toast.LENGTH_SHORT).show()
+
+            } else {
+
+                Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
         binding.itemLogin.btnLogin.setOnClickListener {
             val account = Account.Builder()
-                .addName(binding.itemLogin.textOne.text.toString())
+                .addUsername(binding.itemLogin.textOne.text.toString())
                 .addPassword(binding.itemLogin.textTwo.text.toString())
                 .build()
 
