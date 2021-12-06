@@ -4,14 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/dr_cardproduct.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/drawable/ic_cart.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/drawable/item_button.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/drawable/shapecorner_radius.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/formtwoeditandbutton.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_forget.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/item_button.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_product.xml" value="0.45" />
         <entry key="app/src/main/res/layout/itemlogin.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.21296296296296297" />
       </map>
     </option>
   </component>

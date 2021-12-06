@@ -18,5 +18,9 @@
     <string name="one">One</string>
     <string name="nameDefault">Thánh Bú Liếm</string>
     <string name="DefaultMail">....@gmail.com</string>
+    <string name="search">Tim Kiếm</string>
+    <string name="profile">Cá Nhân</string>
+    <string name="cart">Giỏ Hàng</string>
+    <string name="Home">Trang Chủ</string>
 
 </resources>

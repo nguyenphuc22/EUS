@@ -12,14 +12,14 @@ data class Account (
     )
 {
    data class Builder(
-       var mId : String? = null,
-       var mUsername : String? = null,
-       var mPhone : String? = null,
-       var mPassword : String? = null,
-       var mName : String? = null,
-       var mDateOfBirth : Long? = null,
-       var mEmail : String? = null,
-       var mImage : String? = null
+       private var mId : String? = null,
+       private var mUsername : String? = null,
+       private var mPhone : String? = null,
+       private var mPassword : String? = null,
+       private var mName : String? = null,
+       private var mDateOfBirth : Long? = null,
+       private var mEmail : String? = null,
+       private var mImage : String? = null
    ) {
        fun addId(id : String) = apply { this.mId = id }
        fun addUsername(username : String) = apply { this.mUsername = username }
