@@ -1,5 +1,6 @@
 package com.example.eus.ViewLogin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.eus.MainActivity
 import com.example.eus.ODT.Account
 import com.example.eus.R
 import com.example.eus.ViewModel.EUSViewModel
