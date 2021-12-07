@@ -8,15 +8,7 @@ import com.example.eus.databinding.ItemButtonBinding
 
 class AdapterCategory : RecyclerView.Adapter<AdapterCategory.CategoryViewHolder>() {
 
-    private lateinit var types : List<String>
-
-    init {
-        var list = ArrayList<String>()
-        for (i in 0..9) {
-            list.add("Tivi")
-        }
-        types = list
-    }
+    private var types : List<String> = ArrayList()
 
     class CategoryViewHolder(var binding : ItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -39,4 +31,8 @@ class AdapterCategory : RecyclerView.Adapter<AdapterCategory.CategoryViewHolder>
         return types.size
     }
 
+    fun setData(list : List<String>) {
+        types = list
+        notifyDataSetChanged()
+    }
 }
