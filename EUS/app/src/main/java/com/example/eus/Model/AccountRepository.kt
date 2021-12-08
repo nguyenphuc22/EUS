@@ -36,15 +36,15 @@ class AccountRepository {
         return null;
     }
 
-//    fun forgetAccount(account: Account): Account?{
-//        return firestore.forgetAccount(account)
-//    }
-//
-//    fun register(account: Account): Account?{
-//        return firestore.register(account)
-//    }
-//
-//    fun profile(account: Account): Account?{
-//        return firestore.profile(account)
-//    }
+    fun forgetAccount(account: Account): Account?{
+        return null
+    }
+
+    fun register(account: Account): Account?{
+        return null
+    }
+
+    fun profile(account: Account): Account?{
+        return null
+    }
 }

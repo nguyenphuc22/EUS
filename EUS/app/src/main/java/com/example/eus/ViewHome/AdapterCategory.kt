@@ -34,7 +34,7 @@ class AdapterCategory(var clickItemCategory: ClickItemCategory) : RecyclerView.A
         return types.size
     }
 
-    fun setData(list : List<String>) {
+    fun setData(list: List<String>) {
         types = list
         notifyDataSetChanged()
     }

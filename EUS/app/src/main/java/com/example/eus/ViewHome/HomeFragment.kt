@@ -3,16 +3,12 @@ package com.example.eus.ViewHome
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.eus.ODT.Account
-import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentHomeBinding
 
 
@@ -21,7 +17,7 @@ class HomeFragment : Fragment(), ClickItemCategory{
     private lateinit var binding : FragmentHomeBinding
     private lateinit var adapterCategory: AdapterCategory
     private lateinit var adapterProduct: AdapterProduct
-
+    private lateinit var viewModel : EUSViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,21 +29,19 @@ class HomeFragment : Fragment(), ClickItemCategory{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
+        viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
         adapterCategory = AdapterCategory(this)
-        Util.fakeCategory().observe(viewLifecycleOwner, Observer {
+        viewModel.getCategory()?.observe(viewLifecycleOwner, Observer {
             adapterCategory.setData(it)
         })
         binding.recyclerCategory.layoutManager = GridLayoutManager(context,5)
         binding.recyclerCategory.adapter = adapterCategory
 
         adapterProduct = AdapterProduct()
-        Util.fakeData().observe(viewLifecycleOwner, Observer {
+        viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
             adapterProduct.setProduct(it)
-        })
 
+        })
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
 
