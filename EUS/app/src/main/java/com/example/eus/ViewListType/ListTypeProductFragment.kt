@@ -18,7 +18,6 @@ class ListTypeProductFragment : Fragment() {
 
     private lateinit var binding : FragmentListTypeProductBinding
     private lateinit var adapterProduct: AdapterProduct
-    private val args : ListTypeProductFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,11 +36,7 @@ class ListTypeProductFragment : Fragment() {
         binding.recyclerListProduct.adapter = adapterProduct
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
     }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
