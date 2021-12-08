@@ -8,9 +8,9 @@
     <string name="Login">Đăng Nhập</string>
     <string name="google">Google</string>
     <string name="Register">Đăng Ký</string>
-    <string name="Forget">Quên mật </string>
+    <string name="Forget">Quên mật  </string>
     <string name="OTP">Nhập OTP </string>
-    <string name="Confirm">Xác </string>
+    <string name="Confirm">Xác nhận</string>
     <string name="New_Password">Nhập mật khẩu </string>
     <string name="New_Password_again">Nhập lại mật </string>
     <string name="DefaultButton">Button</string>
