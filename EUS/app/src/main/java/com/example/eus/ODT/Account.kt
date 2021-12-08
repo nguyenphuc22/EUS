@@ -9,6 +9,7 @@ data class Account (
     var mDateOfBirth : Long? = null,
     var mEmail : String? = null,
     var mImage : String? = null
+
     )
 {
    data class Builder(
@@ -56,6 +57,10 @@ data class Account (
        }
        fun build() : Account {
            return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail)
+       }
+
+       override fun toString(): String {
+           return "Builder(mId=$mId, mUsername=$mUsername, mPhone=$mPhone, mPassword=$mPassword, mName=$mName, mDateOfBirth=$mDateOfBirth, mEmail=$mEmail, mImage=$mImage)"
        }
    }
 }
