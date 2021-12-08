@@ -11,9 +11,20 @@ data class Product(
         private var mPrice : Double? = null,
         private var mTitle : String? = null
     ) {
-        fun addImage(image : String) = apply { this.mImage = image }
-        fun addPrice(price : Double) = apply { this.mPrice = price }
-        fun addTitle(title : String) = apply { this.mTitle = title }
-        fun build() = Product(mImage,mPrice,mTitle)
+        fun addImage(image : String) : Builder {
+            this.mImage = image
+            return this
+        }
+        fun addPrice(price : Double) : Builder {
+            this.mPrice = price
+            return this
+        }
+        fun addTitle(title : String) : Builder {
+            this.mTitle = title
+            return this
+        }
+        fun build() : Product {
+            return Product(mImage,mPrice,mTitle)
+        }
     }
 }
