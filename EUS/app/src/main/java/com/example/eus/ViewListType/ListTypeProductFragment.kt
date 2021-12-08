@@ -1,60 +1,55 @@
-package com.example.eus.ViewHome
+package com.example.eus.ViewListType
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.eus.ODT.Product
 import com.example.eus.R
-import com.example.eus.databinding.FragmentHomeBinding
+import com.example.eus.ViewHome.AdapterProduct
+import com.example.eus.ViewHome.Util
+import com.example.eus.databinding.FragmentListTypeProductBinding
 
 
-class HomeFragment : Fragment(), ClickItemCategory{
+class ListTypeProductFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
-    private lateinit var adapterCategory: AdapterCategory
+    private lateinit var binding : FragmentListTypeProductBinding
     private lateinit var adapterProduct: AdapterProduct
-
+    private val args : ListTypeProductFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentListTypeProductBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        adapterCategory = AdapterCategory(this)
-        Util.fakeCategory().observe(viewLifecycleOwner, Observer {
-            adapterCategory.setData(it)
-        })
-        binding.recyclerCategory.layoutManager = GridLayoutManager(context,5)
-        binding.recyclerCategory.adapter = adapterCategory
-
         adapterProduct = AdapterProduct()
         Util.fakeData().observe(viewLifecycleOwner, Observer {
             adapterProduct.setProduct(it)
         })
-
-        binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
+        binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
+    }
 
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -65,16 +60,4 @@ class HomeFragment : Fragment(), ClickItemCategory{
         }
         return super.onOptionsItemSelected(item)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onClickRadio(type: String) {
-        val action = HomeFragmentDirections.actionHomeFragmentToListTypeProductFragment(type)
-        this.findNavController().navigate(action)
-    }
-
 }

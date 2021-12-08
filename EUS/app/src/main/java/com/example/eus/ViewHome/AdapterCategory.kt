@@ -1,19 +1,22 @@
 package com.example.eus.ViewHome
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eus.databinding.ItemButtonBinding
 
-class AdapterCategory : RecyclerView.Adapter<AdapterCategory.CategoryViewHolder>() {
+class AdapterCategory(var clickItemCategory: ClickItemCategory) : RecyclerView.Adapter<AdapterCategory.CategoryViewHolder>() {
 
     private var types : List<String> = ArrayList()
 
-    class CategoryViewHolder(var binding : ItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CategoryViewHolder(var binding : ItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(type: String) {
             binding.btnCa.text = type
+
+            binding.btnCa.setOnClickListener {
+                clickItemCategory.onClickRadio(type)
+            }
         }
 
     }

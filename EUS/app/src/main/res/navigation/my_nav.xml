@@ -41,5 +41,24 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listTypeProductFragment"
+            app:destination="@id/listTypeProductFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listTypeProductFragment"
+        android:name="com.example.eus.ViewListType.ListTypeProductFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_list_type_product" >
+        <action
+            android:id="@+id/action_listTypeProductFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Nothing" />
     </fragment>
 </navigation>
