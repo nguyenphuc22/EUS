@@ -36,7 +36,7 @@ class ListTypeProductFragment : Fragment() {
         binding.recyclerListProduct.adapter = adapterProduct
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)

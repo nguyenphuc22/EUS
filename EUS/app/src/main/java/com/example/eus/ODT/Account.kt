@@ -21,14 +21,41 @@ data class Account (
        private var mEmail : String? = null,
        private var mImage : String? = null
    ) {
-       fun addId(id : String) = apply { this.mId = id }
-       fun addUsername(username : String) = apply { this.mUsername = username }
-       fun addPhone(phone : String) = apply { this.mPhone = phone }
-       fun addPassword(password : String) = apply { this.mPassword = password }
-       fun addName(name : String) = apply { this.mName = name }
-       fun addDateOfBirth(dateOfBirth : Long) = apply { this.mDateOfBirth = dateOfBirth }
-       fun addEmail(email : String) = apply { this.mEmail = email }
-       fun addImage(mail : String) = apply { this.mImage = mail }
-       fun build() = Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail)
+
+       fun addId(id : String) : Builder {
+           this.mId = id
+           return this
+       }
+       fun addUsername(username : String) : Builder {
+           this.mUsername = username
+           return this
+       }
+       fun addPhone(phone : String) : Builder {
+           this.mPhone = phone
+           return this
+       }
+       fun addPassword(password : String) : Builder {
+           this.mPassword = password
+           return this
+       }
+       fun addName(name : String) : Builder {
+           this.mName = name
+           return this
+       }
+       fun addDateOfBirth(dateOfBirth : Long) : Builder {
+           this.mDateOfBirth = dateOfBirth
+           return this
+       }
+       fun addEmail(email : String) : Builder {
+           this.mEmail = email
+           return this
+       }
+       fun addImage(mail : String) : Builder {
+           this.mImage = mail
+           return this
+       }
+       fun build() : Account {
+           return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail)
+       }
    }
 }
