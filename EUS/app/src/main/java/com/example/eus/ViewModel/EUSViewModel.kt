@@ -26,7 +26,18 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
 
     // Implement Login Google()
     fun loginGoogle() : Account? {
-        return null
+        return repository.loginGoogle()
     }
 
+//    fun forgetAccount(account: Account): Account?{
+//        return repository.forgetAccount(account)
+//    }
+//
+//    fun register(account: Account): Account?{
+//        return repository.register(account)
+//    }
+//
+//    fun profile(account: Account): Account?{
+//        return repository.profile(account)
+//    }
 }
