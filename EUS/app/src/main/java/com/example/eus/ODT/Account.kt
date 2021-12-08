@@ -50,8 +50,8 @@ data class Account (
            this.mEmail = email
            return this
        }
-       fun addImage(mail : String) : Builder {
-           this.mImage = mail
+       fun addImage(url : String) : Builder {
+           this.mImage = url
            return this
        }
        fun build() : Account {
