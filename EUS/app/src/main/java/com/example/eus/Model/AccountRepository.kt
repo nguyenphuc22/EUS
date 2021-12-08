@@ -24,6 +24,6 @@ class AccountRepository {
     }
 
     fun login(account : Account): Account? {
-        return firestore.getAccount(account)
+        return fireStore.getAccount(account)
     }
 }
