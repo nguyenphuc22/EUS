@@ -31,7 +31,11 @@
         android:id="@+id/forgetFragment"
         android:name="com.example.eus.ViewForget.ForgetFragment"
         android:label="@string/Forget"
-        tools:layout="@layout/fragment_forget" />
+        tools:layout="@layout/fragment_forget" >
+        <action
+            android:id="@+id/action_forgetFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.eus.ViewProfile.ProfileFragment"
@@ -64,5 +68,23 @@
             android:name="title"
             app:argType="string"
             android:defaultValue="Nothing" />
+    </fragment>
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.example.eus.ViewForget.VerificationFragment"
+        android:label="@string/verification"
+        tools:layout="@layout/fragment_verification" >
+        <action
+            android:id="@+id/action_verificationFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.eus.ViewForget.ChangePasswordFragment"
+        android:label="@string/change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -10,13 +10,16 @@
         <entry key="app/src/main/res/drawable/item_button.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/drawable/shapecorner_radius.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/form_one_button_input.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/formtwoeditandbutton.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_forget.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/layout/fragment_list_type_product.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_verification.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/item_button.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.25" />
@@ -25,7 +28,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

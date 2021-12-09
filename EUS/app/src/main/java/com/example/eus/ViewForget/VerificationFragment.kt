@@ -9,18 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.eus.R
-import com.example.eus.databinding.FragmentForgetBinding
+import com.example.eus.databinding.FragmentVerificationBinding
 
+class VerificationFragment : Fragment() {
 
-class ForgetFragment : Fragment() {
-
-    private lateinit var binding: FragmentForgetBinding
+    private lateinit var binding: FragmentVerificationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentForgetBinding.inflate(inflater,container,false)
+        binding = FragmentVerificationBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -30,18 +29,20 @@ class ForgetFragment : Fragment() {
         setInitViewState()
         binding.include.btn.setOnClickListener {
             if (!binding.include.text.text?.isBlank()!!) {
-                findNavController().navigate(R.id.action_forgetFragment_to_verificationFragment)
+                findNavController().navigate(R.id.action_verificationFragment_to_changePasswordFragment)
             } else {
-                Toast.makeText(context,"Number is not blank",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"OTP is not blank",Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private fun setInitViewState() {
-        binding.include.layout.hint = resources.getString(R.string.phone)
-        binding.include.text.inputType = InputType.TYPE_CLASS_PHONE
+        binding.include.layout.hint = resources.getString(R.string.OTP)
+        binding.include.text.inputType = InputType.TYPE_CLASS_NUMBER
 
-        binding.include.btn.text = resources.getString(R.string.Send)
+
+        binding.include.btn.text = resources.getString(R.string.Confirm)
     }
 
 }

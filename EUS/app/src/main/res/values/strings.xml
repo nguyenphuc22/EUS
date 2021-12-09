@@ -23,5 +23,8 @@
     <string name="cart">Giỏ Hàng</string>
     <string name="Home">Trang Chủ</string>
     <string name="Send">Gửi</string>
+    <string name="verification">Xác thực OTP</string>
+    <string name="change_password">Đổi Mật Khẩu</string>
+    <string name="password_again">Nhập lại mật khẩu</string>
 
 </resources>
