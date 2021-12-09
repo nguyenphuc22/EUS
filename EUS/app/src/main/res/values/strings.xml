@@ -8,7 +8,7 @@
     <string name="Login">Đăng Nhập</string>
     <string name="google">Google</string>
     <string name="Register">Đăng Ký</string>
-    <string name="Forget">Quên mật  </string>
+    <string name="Forget">Quên mật khẩu </string>
     <string name="OTP">Nhập OTP </string>
     <string name="Confirm">Xác nhận</string>
     <string name="New_Password">Nhập mật khẩu </string>
@@ -22,5 +22,6 @@
     <string name="profile">Cá Nhân</string>
     <string name="cart">Giỏ Hàng</string>
     <string name="Home">Trang Chủ</string>
+    <string name="Send">Gửi</string>
 
 </resources>
