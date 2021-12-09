@@ -33,7 +33,7 @@ class ChangePasswordFragment : Fragment() {
             if (!binding.include.textOne.text?.equals(binding.include.textTwo.text)!!) {
                 Toast.makeText(context,"The password is not the same",Toast.LENGTH_SHORT).show()
             } else {
-                findNavController().navigate(R.id.action_changePasswordFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_changePasswordFragment_to_loginFragment)
             }
         }
 
