@@ -29,10 +29,18 @@ class ExampleInstrumentedTest {
     fun testDatabase() {
         val firebaseDatabase = FirebaseDatabaseRealTime()
         var account = Account.Builder()
-            .addId("2")
-            .addUsername("Phuc VR")
+            .addId("7")
+            .addDateOfBirth(15)
+            .addEmail("mail")
+            .addImage("url")
+            .addPhone("phone")
+            .addName("ngphuc")
+            .addUsername("phuc")
             .addPassword("123")
             .build()
-        Log.i("Test",firebaseDatabase.getAccount(account = account).toString())
+        var a=firebaseDatabase.getAccount(account)
+        Log.i("TestAccount",a.toString())
+        Log.i("TestType",firebaseDatabase.getproductType().toString())
+
     }
 }

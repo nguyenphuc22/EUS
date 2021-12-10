@@ -2,6 +2,7 @@ package com.example.eus
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -10,7 +11,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
+import com.example.eus.ODT.Account
 import com.example.eus.databinding.ActivityMainBinding
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
