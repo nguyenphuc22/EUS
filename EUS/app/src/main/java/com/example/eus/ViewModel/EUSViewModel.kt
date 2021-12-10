@@ -44,10 +44,18 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getCategory(): MutableLiveData<List<String>>? {
-        return Util.fakeCategory()
+        return repository.getDataCategory()
     }
 
     fun getProduct() : MutableLiveData<List<Product>>? {
-        return Util.fakeData()
+        return repository.getDataProduct()
+    }
+
+    fun getOTP(phoneNum: String): String?{
+        return repository.getOTP(phoneNum)
+    }
+
+    fun changePassword(phoneNum: String, password: String){
+        return repository.changePassword(phoneNum, password)
     }
 }
