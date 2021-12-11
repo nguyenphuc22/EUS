@@ -19,7 +19,8 @@ class FirebaseDatabaseRealTime {
     fun getAccout1(account: Account) : MutableLiveData<Account> {
         var accountTmp : MutableLiveData<Account>
         accountTmp = MutableLiveData()
-
+        var nulacc=Account.Builder().build()
+        accountTmp.postValue(nulacc)
         database=Firebase.database.getReference("Accounts")
         database.orderByChild("musername").equalTo(account.mUsername.toString()).addChildEventListener(object :ChildEventListener{
 
@@ -29,7 +30,7 @@ class FirebaseDatabaseRealTime {
                     accountTmp.postValue(tmp)
                     Log.i("TEST2", accountTmp.toString())
                 } else {
-                    accountTmp.postValue(null)
+                    accountTmp.postValue(nulacc)
                 }
             }
 
