@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -30,6 +31,25 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(binding.navHost.id) as NavHostFragment
         navController = navHostFragment.findNavController()
+
+        val firebaseDatabase = FirebaseDatabaseRealTime()
+
+        var account = Account.Builder()
+            .addId("7")
+            .addDateOfBirth(15)
+            .addEmail("mail")
+            .addImage("url")
+            .addPhone("phone")
+            .addName("ngphuc")
+            .addUsername("phuc2")
+            .addPassword("1234")
+            .build()
+
+        var a=firebaseDatabase.getAccout1(account)
+
+        a.observe(this, Observer {
+            Log.i("MainActivity:GetAccout",it.toString())
+        })
 
         setupActionBarWithNavController(navController)
     }
