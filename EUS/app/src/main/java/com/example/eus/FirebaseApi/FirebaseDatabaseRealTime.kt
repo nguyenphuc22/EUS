@@ -20,18 +20,22 @@ class FirebaseDatabaseRealTime {
         var accountTmp : MutableLiveData<Account>
         accountTmp = MutableLiveData()
         var nulacc=Account.Builder().build()
-        accountTmp.postValue(nulacc)
+
         database=Firebase.database.getReference("Accounts")
-        database.orderByChild("musername").equalTo(account.mUsername.toString()).addChildEventListener(object :ChildEventListener{
+        database.addChildEventListener(object :ChildEventListener{
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 var tmp=snapshot.getValue<Account>()
-                if(account.mPassword==tmp?.mPassword) {
-                    accountTmp.postValue(tmp)
-                    Log.i("TEST2", accountTmp.toString())
-                } else {
-                    accountTmp.postValue(nulacc)
+                if(account.mUsername== tmp?.mUsername){
+                    if(account.mPassword==tmp?.mPassword) {
+                        accountTmp.postValue(tmp)
+                        Log.i("TEST2", accountTmp.toString())
+                    } else {
+                        accountTmp.postValue(nulacc)
+                    }
                 }
+                else
+                    accountTmp.postValue(nulacc)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

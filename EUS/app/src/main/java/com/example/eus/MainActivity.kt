@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             .addPhone("phone")
             .addName("ngphuc")
             .addUsername("phuc")
-            .addPassword("1234")
+            .addPassword("1231")
             .build()
 
         var a=firebaseDatabase.getAccout1(account)
