@@ -2,7 +2,6 @@ package com.example.eus.Model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.eus.FirebaseApi.FirebaseAuth
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.FirebaseApi.Firestore
 import com.example.eus.ODT.Account
@@ -14,12 +13,12 @@ class AccountRepository {
     var accounts : MutableLiveData<Account>
 
     var firestore : Firestore
-    var firebaseAuth : FirebaseAuth
+
     var firebaseRealTime: FirebaseDatabaseRealTime
 
     init {
         firestore = Firestore()
-        firebaseAuth = FirebaseAuth()
+        
         accounts = MutableLiveData()
         firebaseRealTime= FirebaseDatabaseRealTime()
     }
