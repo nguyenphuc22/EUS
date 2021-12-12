@@ -19,8 +19,8 @@ class FirebaseDatabaseRealTime {
     fun getAccout1(account: Account) : MutableLiveData<Account> {
         var accountTmp : MutableLiveData<Account>
         accountTmp = MutableLiveData()
-        var nulacc=Account.Builder().build()
-
+        var nulacc : Account?
+        nulacc=null
         database=Firebase.database.getReference("Accounts")
         database.addChildEventListener(object :ChildEventListener{
 
