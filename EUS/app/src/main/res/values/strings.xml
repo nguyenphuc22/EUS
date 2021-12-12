@@ -26,5 +26,6 @@
     <string name="verification">Xác thực OTP</string>
     <string name="change_password">Đổi Mật Khẩu</string>
     <string name="password_again">Nhập lại mật khẩu</string>
+    <string name="logout">Đăng Xuất</string>
 
 </resources>

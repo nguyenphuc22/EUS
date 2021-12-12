@@ -96,8 +96,7 @@ class LoginFragment : Fragment() {
 
 
         binding.itemLogin.btnRegister.setOnClickListener {
-          //  Navigation.findNavController(binding.itemLogin.btnRegister).navigate(R.id.action_loginFragment_to_registerFragment)
-            Firebase.auth.signOut()
+            Navigation.findNavController(binding.itemLogin.btnRegister).navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.itemLogin.btnFoget.setOnClickListener {
@@ -127,14 +126,6 @@ class LoginFragment : Fragment() {
         binding.itemLogin.btnLogin.setOnClickListener {
             val currentUser = auth.currentUser
 
-            println(currentUser?.uid.toString()+
-           currentUser?.displayName.toString()+
-            currentUser?.email.toString())
-           // auth1.checklogin()
-
-//            accountRepository= AccountRepository()
-//           accountRepository.loginGoogle()
-       // Firebase.auth.signOut()
             val account = Account.Builder()
                 .addUsername(binding.itemLogin.textOne.text.toString())
                 .addPassword(binding.itemLogin.textTwo.text.toString())
