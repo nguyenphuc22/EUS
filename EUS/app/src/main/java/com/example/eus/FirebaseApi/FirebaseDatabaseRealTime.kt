@@ -109,28 +109,19 @@ class FirebaseDatabaseRealTime {
         database.child("Accounts").child(account.mId.toString()).setValue(account)
     }
 
-    fun getproductType(): ArrayList<String>?{
+    fun getProductType(): MutableLiveData<List<String>>?{
+        var mutableLiveData : MutableLiveData<List<String>> = MutableLiveData()
         var list= ArrayList<String>()
-        database=Firebase.database.getReference("Products")
-        database.orderByChild("mtype").addChildEventListener(object:ChildEventListener{
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                var tmp=snapshot.getValue<Product>()
-                if(tmp!=null){
-                    list.add(tmp.mType.toString())
-                    Log.i("Testasd",list.toString())
+        database=Firebase.database.getReference("Product Type")
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(type in snapshot.children){
+                        val pType= type.getValue(Product::class.java)
+                        list.add(pType?.mType!!)
+                    }
+                    mutableLiveData.value= list
                 }
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -138,6 +129,7 @@ class FirebaseDatabaseRealTime {
             }
 
         })
-        return list
+
+        return mutableLiveData
     }
 }
