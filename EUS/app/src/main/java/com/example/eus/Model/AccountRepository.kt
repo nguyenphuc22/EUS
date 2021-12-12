@@ -28,9 +28,9 @@ class AccountRepository {
         return accounts
     }
 
-    fun login(account : Account): Account? {
+    fun login(account : Account): MutableLiveData<Account>? {
 
-        return firebaseRealTime.getAccount(account)
+        return firebaseRealTime.getAccout1(account)
     }
 
     fun loginGoogle(): Account?{

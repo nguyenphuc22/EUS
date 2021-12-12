@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             .addImage("url")
             .addPhone("phone")
             .addName("ngphuc")
-            .addUsername("phuc")
+            .addUsername("123")
             .addPassword("123")
             .build()
 

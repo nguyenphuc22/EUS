@@ -22,7 +22,7 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
         accountMutableLiveData = repository.getAccountMutableLiveData()
     }
 
-    fun login(account: Account) : Account? {
+    fun login(account: Account) : MutableLiveData<Account>? {
         return repository.login(account)
     }
 

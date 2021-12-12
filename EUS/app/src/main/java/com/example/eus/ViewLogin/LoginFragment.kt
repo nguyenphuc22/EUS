@@ -142,7 +142,7 @@ class LoginFragment : Fragment() {
             if(viewModel.login(account) != null) {
 
                 Toast.makeText(context,"Sucess",Toast.LENGTH_SHORT).show()
-
+                Log.i("LoginFragment",viewModel.login(account).toString())
             } else {
 
                 Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show()
