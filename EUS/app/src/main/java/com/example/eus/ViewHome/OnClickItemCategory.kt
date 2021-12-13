@@ -2,6 +2,6 @@ package com.example.eus.ViewHome
 
 import android.widget.Button
 
-interface ClickItemCategory {
+interface OnClickItemCategory {
     fun onClickRadio(type : String)
 }

@@ -118,4 +118,14 @@
         app:layout_constraintStart_toStartOf="@+id/txtUserName"
         app:layout_constraintTop_toBottomOf="@+id/txtPhoneInfor" />
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

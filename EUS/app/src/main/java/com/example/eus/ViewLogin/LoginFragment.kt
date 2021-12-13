@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
@@ -95,8 +96,7 @@ class LoginFragment : Fragment() {
 
 
         binding.itemLogin.btnRegister.setOnClickListener {
-          //  Navigation.findNavController(binding.itemLogin.btnRegister).navigate(R.id.action_loginFragment_to_registerFragment)
-            Firebase.auth.signOut()
+            Navigation.findNavController(binding.itemLogin.btnRegister).navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.itemLogin.btnFoget.setOnClickListener {
@@ -126,29 +126,22 @@ class LoginFragment : Fragment() {
         binding.itemLogin.btnLogin.setOnClickListener {
             val currentUser = auth.currentUser
 
-            println(currentUser?.uid.toString()+
-           currentUser?.displayName.toString()+
-            currentUser?.email.toString())
-           // auth1.checklogin()
-
-//            accountRepository= AccountRepository()
-//           accountRepository.loginGoogle()
-       // Firebase.auth.signOut()
             val account = Account.Builder()
                 .addUsername(binding.itemLogin.textOne.text.toString())
                 .addPassword(binding.itemLogin.textTwo.text.toString())
                 .build()
 
-            if(viewModel.login(account) != null) {
+            viewModel.login(account)?.observe(viewLifecycleOwner, Observer {
+                if (it == null) {
 
-                Toast.makeText(context,"Sucess",Toast.LENGTH_SHORT).show()
-                Log.i("LoginFragment",viewModel.login(account).toString())
-            } else {
+                    Toast.makeText(context,"Fail" + it.toString(),Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show()
+                } else {
 
-            }
+                    Toast.makeText(context,"Success" + it.toString(),Toast.LENGTH_SHORT).show()
 
+                }
+            })
         }
     }
 

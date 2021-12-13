@@ -9,7 +9,7 @@ import com.example.eus.ODT.Account
 import com.example.eus.ODT.Product
 import com.example.eus.ViewHome.Util
 
-class AccountRepository {
+class AccountRepository : Repository {
 
     var accounts : MutableLiveData<Account>
 

@@ -10,7 +10,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.Query
 
-class FirebaseDatabaseRealTime {
+class FirebaseDatabaseRealTime : FireApiDatabase {
     private lateinit var database: DatabaseReference
     lateinit var list: ArrayList<Account>
 
