@@ -30,27 +30,21 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Glide.with(this)
             .load(args.productDetail?.mImage)
             .fitCenter()
+            .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(binding.imgProduct)
 
         binding.txtTitle.text = args.productDetail?.mTitle
         binding.txtPrice.text =Product().Util().convertToMoney(args.productDetail?.mPrice)
         binding.txtDescription.text = args.productDetail?.mDescription
-        val details = args.productDetail?.mDetails
-        Log.i("DetailFragment",details.toString())
-        Log.i("DetailFragment",details?.get(0)!!)
         adapterDetail = AdapterDetail(args.productDetail?.mDetails!!)
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
         binding.include.recyclerDetail.adapter = adapterDetail
-        binding.include.recyclerDetail.focusable = View.NOT_FOCUSABLE
-        binding.include.recyclerDetail.isNestedScrollingEnabled = false
-
     }
 
 }
