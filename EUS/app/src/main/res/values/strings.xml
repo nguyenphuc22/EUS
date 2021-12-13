@@ -27,5 +27,9 @@
     <string name="change_password">Đổi Mật Khẩu</string>
     <string name="password_again">Nhập lại mật khẩu</string>
     <string name="logout">Đăng Xuất</string>
+    <string name="DefailtProduct">Điện thoại IPhone 13 Pro Mã 256 GB - Hàng Chính Hãng</string>
+    <string name="Price">36.990.000đ</string>
+    <string name="Detail">Thông Tin Chi Tiết</string>
+    <string name="DetailHeader">Danh Muc</string>
 
 </resources>

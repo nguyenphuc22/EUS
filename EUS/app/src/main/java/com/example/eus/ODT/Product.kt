@@ -13,15 +13,15 @@ data class Product(
     )
 {
     data class Builder(
-        var mID : String? = null,
-        var mImage: String? = null,
-        var mPrice: Double? = null,
-        var mTitle: String? = null,
-        var mType : String? = null,
-        var mDescription : String? = null,
-        var mQuantity : Int? = null,
-        var mName : String? = null,
-        var mDetails : List<String>? = null
+        private var mID : String? = null,
+        private var mImage: String? = null,
+        private var mPrice: Double? = null,
+        private var mTitle: String? = null,
+        private var mType : String? = null,
+        private var mDescription : String? = null,
+        private var mQuantity : Int? = null,
+        private var mName : String? = null,
+        private var mDetails : List<String>? = null
     ) {
         fun addID( id : String) : Builder {
             this.mID = id
