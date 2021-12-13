@@ -96,6 +96,11 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.eus.ViewDetail.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:label="@string/DetailProduct"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="productDetail"
+            app:argType="com.example.eus.ODT.Product"
+            app:nullable="true" />
+    </fragment>
 </navigation>

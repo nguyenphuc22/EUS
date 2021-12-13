@@ -6,17 +6,6 @@ import java.text.NumberFormat
 
 class Util {
     companion object {
-        fun convertToMoney(price: Double?): String {
-            var numberFormat: NumberFormat = NumberFormat.getCurrencyInstance()
-            var number : String = numberFormat.format(price)
-            if (number.endsWith(".00")) {
-                var pos = number.lastIndexOf(".00")
-                if (pos != -1) {
-                    number = number.substring(1,pos)
-                }
-            }
-            return number
-        }
 
         fun fakeCategory() : MutableLiveData<List<String>> {
             var mutableLiveData : MutableLiveData<List<String>> = MutableLiveData()
@@ -68,6 +57,20 @@ class Util {
                 .build())
             mutableLiveData.value = list
             return mutableLiveData
+        }
+
+        fun fakeProduct(): Product {
+            var list = ArrayList<String>()
+            for (i in 0..10) {
+                list.add("Header:value")
+            }
+            return Product.Builder()
+                .addImage("https://upload.wikimedia.org/wikipedia/commons/0/0c/E-girl.png")
+                .addDetails(list)
+                .addDescription("Điện thoại ngon pro vip 18+")
+                .addPrice(44000000.0)
+                .addTitle("Điện thoại")
+                .build()
         }
     }
 }

@@ -31,5 +31,6 @@
     <string name="Price">36.990.000đ</string>
     <string name="Detail">Thông Tin Chi Tiết</string>
     <string name="DetailHeader">Danh Muc</string>
+    <string name="DetailProduct">Thông Tin Chi Tiết Sản Phẩm</string>
 
 </resources>

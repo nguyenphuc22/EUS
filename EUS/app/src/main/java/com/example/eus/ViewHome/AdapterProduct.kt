@@ -11,16 +11,20 @@ import com.example.eus.databinding.ItemProductBinding
 class AdapterProduct : RecyclerView.Adapter<AdapterProduct.ProductViewHolder>() {
 
     private var products : ArrayList<Product> = ArrayList()
+    private var onClickItemProduct : OnClickItemProduct? = null
 
-    class ProductViewHolder(var binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ProductViewHolder(var binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.txtTitle.text = product.mTitle
-            binding.txtPrice.text = Util.convertToMoney(product.mPrice)
+            binding.txtPrice.text = product.Util().convertToMoney(product.mPrice)
             Glide.with(binding.root)
                 .load(product.mImage)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageView2)
+            binding.root.setOnClickListener {
+                onClickItemProduct?.onCLickProduct(product)
+            }
         }
     }
 
@@ -40,5 +44,9 @@ class AdapterProduct : RecyclerView.Adapter<AdapterProduct.ProductViewHolder>() 
     fun setProduct(list : List<Product>) {
         this.products = list as ArrayList<Product>
         notifyDataSetChanged()
+    }
+
+    fun addOnClickItem(onClickItemProduct: OnClickItemProduct) {
+        this.onClickItemProduct = onClickItemProduct
     }
 }

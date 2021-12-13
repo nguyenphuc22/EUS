@@ -2,13 +2,13 @@ package com.example.eus.ViewHome
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.eus.ODT.Product
 import com.example.eus.R
 import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentHomeBinding
@@ -19,7 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class HomeFragment : Fragment(), ClickItemCategory{
+class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var auth: FirebaseAuth
@@ -38,7 +38,8 @@ class HomeFragment : Fragment(), ClickItemCategory{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
-        adapterCategory = AdapterCategory(this)
+        adapterCategory = AdapterCategory()
+        adapterCategory.addOnClickCategory(this)
         viewModel.getCategory()?.observe(viewLifecycleOwner, Observer {
             adapterCategory.setData(it)
         })
@@ -46,6 +47,7 @@ class HomeFragment : Fragment(), ClickItemCategory{
         binding.recyclerCategory.adapter = adapterCategory
 
         adapterProduct = AdapterProduct()
+        adapterProduct.addOnClickItem(this)
         viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
             adapterProduct.setProduct(it)
 
@@ -106,6 +108,12 @@ class HomeFragment : Fragment(), ClickItemCategory{
     override fun onClickRadio(type: String) {
         val action = HomeFragmentDirections.actionHomeFragmentToListTypeProductFragment(type)
         this.findNavController().navigate(action)
+    }
+
+    override fun onCLickProduct(product: Product) {
+        val productFake = Util.fakeProduct()
+        var action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productFake)
+        findNavController().navigate(action)
     }
 
 }
