@@ -44,6 +44,7 @@ class AccountRepository : Repository {
     }
 
     fun register(account: Account): MutableLiveData<Boolean>{
+
         return firebaseRealTime.pushAccount(account)
     }
 

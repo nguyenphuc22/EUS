@@ -66,6 +66,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
 
 
     override fun pushAccount(account: Account): MutableLiveData<Boolean>{
+
         database=Firebase.database.getReference()
         var ispush: MutableLiveData<Boolean>
         ispush= MutableLiveData()
@@ -80,7 +81,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
             })
         return ispush
     }
-    fun isExist(account: Account):MutableLiveData<Boolean>{
+    override fun isExist(account: Account):MutableLiveData<Boolean>{
         var isAccount : MutableLiveData<Boolean>
         isAccount = MutableLiveData()
 
