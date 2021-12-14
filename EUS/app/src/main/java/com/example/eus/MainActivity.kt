@@ -41,17 +41,16 @@ class MainActivity : AppCompatActivity() {
             .addImage("url")
             .addPhone("phone")
             .addName("ngphuc")
-            .addUsername("123")
+            .addUsername("841")
             .addPassword("123")
             .build()
 
-        var a=firebaseDatabase.getAccout1(account)
+        var a=firebaseDatabase.isExist(account)
 
         a.observe(this, Observer {
-            if(it!=null)
+
                 Log.i("MainActivity:GetAccout",it.toString())
-            else
-                Log.i("MainActivity:GetAccout","null")
+
         })
 
         setupActionBarWithNavController(navController)

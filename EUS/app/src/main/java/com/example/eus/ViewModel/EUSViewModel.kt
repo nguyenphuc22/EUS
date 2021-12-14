@@ -35,7 +35,7 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
         return repository.forgetAccount(account)
     }
 
-    fun register(account: Account): Account?{
+    fun register(account: Account): MutableLiveData<Boolean>{
         return repository.register(account)
     }
 

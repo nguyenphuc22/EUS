@@ -14,7 +14,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     private lateinit var database: DatabaseReference
     lateinit var list: ArrayList<Account>
 
-    lateinit var accountTmp : Account
+
 
     override fun getAccout1(account: Account) : MutableLiveData<Account> {
         var accountTmp : MutableLiveData<Account>
@@ -91,7 +91,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                 var tmp=snapshot.getValue<Account>()
                 if(account.mUsername== tmp?.mUsername){
                         isAccount.postValue(true)
-                        Log.i("TEST2", accountTmp.toString())
+
                 }
                 else {
                         isAccount.postValue(false)

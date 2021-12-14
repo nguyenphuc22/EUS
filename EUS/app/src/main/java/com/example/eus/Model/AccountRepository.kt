@@ -3,6 +3,7 @@ package com.example.eus.Model
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.eus.FirebaseApi.FireApiDatabase
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.FirebaseApi.Firestore
 import com.example.eus.ODT.Account
@@ -15,7 +16,7 @@ class AccountRepository : Repository {
 
     var firestore : Firestore
 
-    var firebaseRealTime: FirebaseDatabaseRealTime
+    var firebaseRealTime: FireApiDatabase
 
     init {
         firestore = Firestore()
@@ -42,8 +43,8 @@ class AccountRepository : Repository {
         return null
     }
 
-    fun register(account: Account): Account?{
-        return null
+    fun register(account: Account): MutableLiveData<Boolean>{
+        return firebaseRealTime.pushAccount(account)
     }
 
     fun profile(account: Account): Account?{
