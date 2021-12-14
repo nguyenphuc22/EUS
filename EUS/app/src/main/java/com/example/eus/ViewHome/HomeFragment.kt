@@ -68,23 +68,21 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val currentUser = auth.currentUser
+
         when(item.itemId) {
             R.id.itemProfile -> {
-
                    if(sharedPref.getState(activity).equals("isLogged")){
                        this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
                    }else{
                        this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                    }
-
-
             }
             R.id.itemCart->{
 
 
             }
             R.id.itemSearch->{
-               
+
             }
         }
         return super.onOptionsItemSelected(item)

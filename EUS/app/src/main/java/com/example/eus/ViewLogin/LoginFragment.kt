@@ -36,13 +36,15 @@ import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var account: Account.Builder
+
     private lateinit var firebaseDatabaseRealTime: FirebaseDatabaseRealTime
     private lateinit var sharePref: ManagerSharePref
     private lateinit var binding : FragmentLoginBinding
     private lateinit var viewModel: EUSViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var accountRepository: AccountRepository
+
+
     var resultLauncher = registerForActivityResult(
         StartActivityForResult()
     ){ result ->
@@ -112,6 +114,7 @@ class LoginFragment : Fragment() {
 
 
             sharePref.setState(activity,"isLogged")
+
         }
 
         binding.itemLogin.btnLogin.setOnClickListener {
@@ -142,6 +145,26 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignInActivity", "signInWithCredential:success")
+
+                    var account =Account.Builder()
+                        .addUsername(auth.currentUser?.email.toString())
+                        .addName(auth.currentUser?.displayName.toString())
+                        .addEmail(auth.currentUser?.email.toString())
+                        .addDateOfBirth(0)
+                        .addId("")
+                        .addPhone("")
+                        .build()
+
+
+                    viewModel.isExist(account).observe(viewLifecycleOwner, Observer {
+                        Log.i("test123",it.toString())
+
+                        if(it==false){
+                                viewModel.register(account)
+                    }
+                    })
+
+
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
                     // If sign in fails, display a message to the user.

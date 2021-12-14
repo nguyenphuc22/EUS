@@ -70,7 +70,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database=Firebase.database.getReference()
         var ispush: MutableLiveData<Boolean>
         ispush= MutableLiveData()
-        database.child("Accounts").child(account.mId.toString()).setValue(account,
+        database.child("Accounts").push().setValue(account,
             object: DatabaseReference.CompletionListener{
                 override fun onComplete(error: DatabaseError?, ref: DatabaseReference) {
                     if (error != null) {
