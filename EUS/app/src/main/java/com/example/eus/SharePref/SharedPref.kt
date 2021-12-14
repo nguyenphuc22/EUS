@@ -1,5 +1,10 @@
 package com.example.eus.SharePref
 
+import android.app.Activity
+
 interface SharedPref {
-    fun stateLogin() : Boolean
+    fun setState(activity: Activity?,state:String)
+    fun getState(activity: Activity?):String?
+
+
 }
