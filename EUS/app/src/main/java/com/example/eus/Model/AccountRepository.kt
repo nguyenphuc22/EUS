@@ -69,4 +69,7 @@ class AccountRepository : Repository {
 //        return mutableLiveData
         return Util.fakeData()
     }
+    fun isExist(account: Account): MutableLiveData<Boolean>{
+        return firebaseRealTime.isExist(account)
+    }
 }

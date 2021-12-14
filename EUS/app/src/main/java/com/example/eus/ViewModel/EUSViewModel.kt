@@ -58,4 +58,7 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
     fun changePassword(phoneNum: String, password: String){
         return repository.changePassword(phoneNum, password)
     }
+    fun isExist(account: Account): MutableLiveData<Boolean>{
+        return repository.isExist(account)
+    }
 }
