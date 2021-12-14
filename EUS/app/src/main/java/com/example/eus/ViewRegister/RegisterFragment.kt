@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.eus.ODT.Account
 import com.example.eus.R
 import com.example.eus.ViewModel.EUSViewModel
@@ -43,6 +44,7 @@ class RegisterFragment : Fragment() {
             if (viewModel.register(account = account) != null) {
 
                 Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
+                this.findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                 viewModel.register(account)
             } else {
 

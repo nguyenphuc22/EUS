@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.SharePref.ManagerSharePref
 import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentHomeBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
     private lateinit var adapterCategory: AdapterCategory
     private lateinit var adapterProduct: AdapterProduct
     private lateinit var viewModel : EUSViewModel
+    private lateinit var sharedPref:ManagerSharePref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +54,8 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
             adapterProduct.setProduct(it)
 
         })
-        auth=Firebase.auth
+        auth= FirebaseAuth.getInstance()
+        sharedPref= ManagerSharePref()
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
 
@@ -67,16 +70,13 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         val currentUser = auth.currentUser
         when(item.itemId) {
             R.id.itemProfile -> {
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
-                if (sharedPref != null) {
-                   // println(sharedPref.getString("isLogin","false"))
-                   if(sharedPref.getString("isLogin","false").equals("isLogged")){
+                   if(sharedPref.getState(activity).equals("isLogged")){
                        this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
                    }else{
                        this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                    }
-                }
+
 
             }
             R.id.itemCart->{
@@ -84,16 +84,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
             }
             R.id.itemSearch->{
-                auth.signOut()
-                GoogleSignIn.getClient(this.activity, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
-                    .signOut()
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                if (sharedPref != null) {
-                    with (sharedPref.edit()) {
-                        putString("isLogin","")
-                        apply()
-                    }
-                }
+               
             }
         }
         return super.onOptionsItemSelected(item)

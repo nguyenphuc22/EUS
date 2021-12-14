@@ -29,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.Model.AccountRepository
+import com.example.eus.SharePref.ManagerSharePref
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -37,7 +38,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var account: Account.Builder
     private lateinit var firebaseDatabaseRealTime: FirebaseDatabaseRealTime
-
+    private lateinit var sharePref: ManagerSharePref
     private lateinit var binding : FragmentLoginBinding
     private lateinit var viewModel: EUSViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -85,7 +86,7 @@ class LoginFragment : Fragment() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this.activity, gso)
         auth= Firebase.auth
-
+        sharePref= ManagerSharePref()
         return binding.root
     }
 
@@ -108,23 +109,12 @@ class LoginFragment : Fragment() {
 
          val signInIntent = googleSignInClient.signInIntent
             resultLauncher.launch((signInIntent))
-           while(auth.currentUser!=null){
 
-           }
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-            if (sharedPref != null) {
-                with (sharedPref.edit()) {
-                    putString("isLogin","isLogged")
-                    apply()
-                }
-            }
-
+            sharePref.setState(activity,"isLogged")
         }
 
         binding.itemLogin.btnLogin.setOnClickListener {
-            val currentUser = auth.currentUser
 
             val account = Account.Builder()
                 .addUsername(binding.itemLogin.textOne.text.toString())
@@ -152,7 +142,7 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignInActivity", "signInWithCredential:success")
-
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.d("SignInActivity", "signInWithCredential:failure")
