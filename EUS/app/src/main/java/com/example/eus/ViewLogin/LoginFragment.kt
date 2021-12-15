@@ -146,25 +146,6 @@ class LoginFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignInActivity", "signInWithCredential:success")
 
-                    var account =Account.Builder()
-                        .addUsername(auth.currentUser?.email.toString())
-                        .addName(auth.currentUser?.displayName.toString())
-                        .addEmail(auth.currentUser?.email.toString())
-                        .addDateOfBirth(0)
-                        .addId("")
-                        .addPhone("")
-                        .build()
-
-
-                    viewModel.isExist(account).observe(viewLifecycleOwner, Observer {
-                        Log.i("test123",it.toString())
-
-                        if(it==false){
-                                viewModel.register(account)
-                        }
-                    })
-
-
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
                     // If sign in fails, display a message to the user.
