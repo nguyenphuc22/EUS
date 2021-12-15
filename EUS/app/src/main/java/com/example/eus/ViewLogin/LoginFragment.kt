@@ -161,7 +161,7 @@ class LoginFragment : Fragment() {
 
                         if(it==false){
                                 viewModel.register(account)
-                    }
+                        }
                     })
 
 
