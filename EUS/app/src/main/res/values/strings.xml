@@ -35,5 +35,8 @@
     <string name="Description">Mô tả</string>
     <string name="AddCart">Thêm Giỏ hàng</string>
     <string name="Chat">Trò Chuyện</string>
+    <string name="Total_Price">Tổng Cộng</string>
+    <string name="Buy">Mua Hàng</string>
+    <string name="Delete">Xoá</string>
 
 </resources>
