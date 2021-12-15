@@ -122,6 +122,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         })
         return isAccount
     }
+
     override fun getProductType(): MutableLiveData<List<String>>?{
         var mutableLiveData : MutableLiveData<List<String>> = MutableLiveData()
         var list= ArrayList<String>()
@@ -143,6 +144,59 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
 
         })
 
+        return mutableLiveData
+    }
+
+    override fun getAllProduct(): MutableLiveData<List<Product>> {
+        var mutableLiveData : MutableLiveData<List<Product>> = MutableLiveData()
+        var list= ArrayList<Product>()
+        database= Firebase.database.getReference("Products")
+        database.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(productSnapshot in snapshot.children){
+                        val product= productSnapshot.getValue(Product::class.java)
+                        list.add(product!!)
+                    }
+                }
+                mutableLiveData.value= list
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+    }
+
+    override fun getListProduct(type: String): MutableLiveData<List<Product>> {
+        var mutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
+        var list= ArrayList<Product>()
+        database= Firebase.database.getReference("Products")
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(productSnapshot in snapshot.children){
+                        val product = productSnapshot.getValue(Product::class.java)
+                        if(product?.mType == type){
+                            list.add(product)
+                        }
+                    }
+                    if(list.isEmpty()){
+                        mutableLiveData.value= list
+                    }
+                    else{
+                        mutableLiveData.value= null
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
         return mutableLiveData
     }
 }
