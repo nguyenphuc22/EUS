@@ -45,7 +45,6 @@ class RegisterFragment : Fragment() {
 
                 Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
                 this.findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-                viewModel.register(account)
             } else {
 
                 Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show()

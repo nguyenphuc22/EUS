@@ -2,12 +2,14 @@ package com.example.eus.ViewHome
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.eus.ODT.Account
 import com.example.eus.ODT.Product
 import com.example.eus.R
 import com.example.eus.SharePref.ManagerSharePref
@@ -58,7 +60,23 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         sharedPref= ManagerSharePref()
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
+        if(auth.currentUser!=null){
+        var account = Account.Builder()
+            .addUsername(auth.currentUser?.email.toString())
+            .addName(auth.currentUser?.displayName.toString())
+            .addEmail(auth.currentUser?.email.toString())
+            .addDateOfBirth(0)
+            .addId("")
+            .addPhone("")
+            .build()
+        viewModel.isExist(account).observe(viewLifecycleOwner, {
+            Log.i("test123",it.toString())
 
+            if(it==false){
+                viewModel.register(account)
+            }
+        })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
