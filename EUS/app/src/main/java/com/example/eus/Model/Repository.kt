@@ -15,5 +15,6 @@ interface Repository {
     fun changePassword(phoneNum: String, password: String)
     fun getDataProduct(): MutableLiveData<List<Product>>
     fun isExist(account: Account): MutableLiveData<Boolean>
+    fun getListProduct(type: String): MutableLiveData<List<Product>>
 
 }

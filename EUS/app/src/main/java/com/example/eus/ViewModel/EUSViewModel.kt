@@ -61,4 +61,8 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
     fun isExist(account: Account): MutableLiveData<Boolean>{
         return repository.isExist(account)
     }
+
+    fun getListProduct(type: String): MutableLiveData<List<Product>>{
+        return repository.getListProduct(type)
+    }
 }

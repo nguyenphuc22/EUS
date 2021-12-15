@@ -69,4 +69,8 @@ class AccountRepository : Repository {
     override fun isExist(account: Account): MutableLiveData<Boolean>{
         return firebaseRealTime.isExist(account)
     }
+
+    override fun getListProduct(type: String): MutableLiveData<List<Product>> {
+        return firebaseRealTime.getListProduct(type)
+    }
 }

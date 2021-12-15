@@ -177,17 +177,11 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
-                    for(productSnapshot in snapshot.children){
+                    for(productSnapshot in snapshot.children) {
                         val product = productSnapshot.getValue(Product::class.java)
-                        if(product?.mType == type){
+                        if (product?.mType == type) {
                             list.add(product)
                         }
-                    }
-                    if(list.isEmpty()){
-                        mutableLiveData.value= list
-                    }
-                    else{
-                        mutableLiveData.value= null
                     }
                 }
             }
