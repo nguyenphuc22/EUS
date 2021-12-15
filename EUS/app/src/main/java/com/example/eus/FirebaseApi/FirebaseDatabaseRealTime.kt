@@ -123,7 +123,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         return isAccount
     }
 
-    override fun getProductType(): MutableLiveData<List<String>>?{
+    override fun getProductType(): MutableLiveData<List<String>>{
         var mutableLiveData : MutableLiveData<List<String>> = MutableLiveData()
         var list= ArrayList<String>()
         database=Firebase.database.getReference("Product Type")
@@ -159,7 +159,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                         list.add(product!!)
                     }
                 }
-                mutableLiveData.value= list
+                mutableLiveData.postValue(list)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -183,14 +183,17 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                             list.add(product)
                         }
                     }
+                    mutableLiveData.postValue(list)
                 }
             }
+
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
         })
+
         return mutableLiveData
     }
 }
