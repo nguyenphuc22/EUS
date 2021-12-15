@@ -25,52 +25,48 @@ class AccountRepository : Repository {
         firebaseRealTime= FirebaseDatabaseRealTime()
     }
 
-    fun getAccountMutableLiveData(): MutableLiveData<Account> {
+    override fun getAccountMutableLiveData(): MutableLiveData<Account> {
         return accounts
     }
 
-    fun login(account : Account): MutableLiveData<Account>? {
+    override fun login(account : Account): MutableLiveData<Account>? {
 
         return firebaseRealTime.getAccout1(account)
     }
 
-    fun loginGoogle(): Account?{
+    override fun loginGoogle(): Account?{
 //        return Util.fakeAccount();
         return null;
     }
 
-    fun forgetAccount(account: Account): Account?{
+    override fun forgetAccount(account: Account): Account?{
         return null
     }
 
-    fun register(account: Account): MutableLiveData<Boolean>{
+    override fun register(account: Account): MutableLiveData<Boolean>{
 
         return firebaseRealTime.pushAccount(account)
     }
 
-    fun profile(account: Account): Account?{
+    override fun profile(account: Account): Account?{
         return null
     }
 
-    fun getOTP(phoneNum: String): String?{
+    override fun getOTP(phoneNum: String): String?{
         return null
     }
 
-    fun changePassword(phoneNum: String, password: String){}
+    override fun changePassword(phoneNum: String, password: String){}
 
     fun getDataCategory(): MutableLiveData<List<String>>?{
         return firebaseRealTime.getProductType()
-//        return Util.fakeCategory()
     }
 
-    fun getDataProduct(): MutableLiveData<List<Product>>{
-//        var mutableLiveData : MutableLiveData<List<Product>> = MutableLiveData()
-//        var list = firestore.getDataProduct()
-//        mutableLiveData.value= list
-//        return mutableLiveData
-        return Util.fakeData()
+    override fun getDataProduct(): MutableLiveData<List<Product>>{
+        return firebaseRealTime.getAllProduct()
+//        return Util.fakeData()
     }
-    fun isExist(account: Account): MutableLiveData<Boolean>{
+    override fun isExist(account: Account): MutableLiveData<Boolean>{
         return firebaseRealTime.isExist(account)
     }
 }
