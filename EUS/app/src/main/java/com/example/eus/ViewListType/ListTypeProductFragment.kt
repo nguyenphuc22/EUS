@@ -60,6 +60,9 @@ class ListTypeProductFragment : Fragment() {
             R.id.itemProfile -> {
                 this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
             }
+            R.id.itemCart -> {
+                this.findNavController().navigate(R.id.action_listTypeProductFragment_to_cartFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

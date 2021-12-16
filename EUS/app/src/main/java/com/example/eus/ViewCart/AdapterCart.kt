@@ -1,0 +1,61 @@
+package com.example.eus.ViewCart
+
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.eus.ODT.Cart
+import com.example.eus.ODT.Product
+import com.example.eus.R
+import com.example.eus.databinding.FragmentCartBinding
+import com.example.eus.databinding.ItemCartBinding
+
+class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCart.CartViewHolder>() {
+
+    private var mCart = Cart(ArrayList<Product>())
+
+    inner class CartViewHolder(var binding: ItemCartBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("NotifyDataSetChanged")
+        fun bind(product: Product?) {
+            Glide.with(binding.root)
+                .load(product?.mImage)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(binding.img)
+            binding.txtName.text = product?.mTitle
+            binding.textPrice.text = product?.Util()?.convertToMoney(product?.mPrice)
+            binding.txtNumber.text = product?.mQuantity.toString()
+
+            binding.txtPlus.setOnClickListener {
+                product?.let { it1 -> onClickCart.onClickPlus(product = it1) }
+                notifyDataSetChanged()
+            }
+
+            binding.txtMinus.setOnClickListener {
+                product?.let { it1 -> onClickCart.onClickMinus(product = it1) }
+                notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        return CartViewHolder(
+            ItemCartBinding.inflate(
+                LayoutInflater.from(parent.context),parent,false))
+    }
+
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+        holder.bind(mCart.getProduct(position))
+    }
+
+    override fun getItemCount(): Int {
+        return mCart.getSize()
+    }
+
+    fun setData(cart : Cart) {
+        mCart = cart
+    }
+}

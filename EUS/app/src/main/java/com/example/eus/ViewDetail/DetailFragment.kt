@@ -3,11 +3,11 @@ package com.example.eus.ViewDetail
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.get
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -46,5 +46,28 @@ class DetailFragment : Fragment() {
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
         binding.include.recyclerDetail.adapter = adapterDetail
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.itemCart->{
+                this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        var itemSearch : MenuItem = menu.findItem(R.id.itemSearch)
+        itemSearch.isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
 
 }

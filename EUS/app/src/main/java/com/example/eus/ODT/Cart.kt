@@ -23,4 +23,9 @@ data class Cart(
         return products.get(index)
     }
 
+    fun getSize() : Int {
+        return products.size
+    }
+
+
 }

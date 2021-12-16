@@ -96,8 +96,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
                    }
             }
             R.id.itemCart->{
-
-
+                this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
             }
             R.id.itemSearch->{
 
