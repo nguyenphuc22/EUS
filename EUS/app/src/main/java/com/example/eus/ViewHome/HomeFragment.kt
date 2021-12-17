@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,8 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
     private lateinit var adapterProduct: AdapterProduct
     private lateinit var viewModel : EUSViewModel
     private lateinit var sharedPref:ManagerSharePref
+    private var hot_number = 0
+    private lateinit var tv :TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,7 +100,13 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
                    }
             }
             R.id.itemCart->{
-                this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                hot_number++
+                var count = hot_number.toString()
+                tv.text = count
+
+                if(hot_number==20){
+                    tv.visibility=View.INVISIBLE}
+               // this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
             }
             R.id.itemSearch->{
 
@@ -107,7 +117,24 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
+        val badgeLayout = menu.findItem(R.id.itemCart).actionView as RelativeLayout
+        tv = badgeLayout.findViewById<View>(R.id.count) as TextView
+        tv.text = "12"
 
+
+
+
+        badgeLayout.setOnClickListener {
+           // println("acc")
+//            hot_number++
+//            var count = hot_number.toString()
+//            tv.text = count
+            onOptionsItemSelected(menu.findItem(R.id.itemCart));
+//            if(hot_number==20){
+//                tv.visibility=View.INVISIBLE
+//
+//            }
+            }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
