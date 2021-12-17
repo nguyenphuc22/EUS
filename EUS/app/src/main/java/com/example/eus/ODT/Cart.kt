@@ -6,7 +6,7 @@ data class Cart(
     fun calc() : Double {
         var price : Double = 0.0
         for (product in products) {
-            price += product.mPrice!!
+            price += product.mQuantity?.let { product.mPrice?.times(it) }!!
         }
         return price
     }
@@ -27,5 +27,8 @@ data class Cart(
         return products.size
     }
 
+    fun  delete(product: Product) {
+        products.remove(product)
+    }
 
 }

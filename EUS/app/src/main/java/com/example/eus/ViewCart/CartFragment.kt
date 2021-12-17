@@ -1,12 +1,14 @@
 package com.example.eus.ViewCart
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eus.ODT.Product
 import com.example.eus.R
@@ -30,21 +32,34 @@ class CartFragment : Fragment(), OnClickCart {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         adapterCart = AdapterCart(this)
         Util.fakeCart().observe(viewLifecycleOwner, Observer {
+            Log.i("Cart",it.toString())
             adapterCart.setData(it)
         })
         binding.recyclerCart.layoutManager = LinearLayoutManager(context)
         binding.recyclerCart.adapter = adapterCart
+
+        binding.include.btnBuy.setOnClickListener {
+            findNavController().navigate(R.id.action_cartFragment_to_paymentFragment)
+        }
+    }
+
+    fun initView() {
+        binding.include.txtPrice.text = getString(R.string.titlePrice)
+        binding.include.btnBuy.text = getString(R.string.payment)
     }
 
     override fun onClickPlus(product: Product) {
-        Toast.makeText(context,"Click Plus",Toast.LENGTH_SHORT).show()
         product.mQuantity = product.mQuantity?.plus(1)
     }
 
+    override fun onUpdatePrice(price: Double) {
+        binding.include.txtPrice.text = Product().Util().convertToMoney(price)
+    }
+
     override fun onClickMinus(product: Product) {
-        Toast.makeText(context,"Click Minus",Toast.LENGTH_SHORT).show()
         product.mQuantity = product.mQuantity?.minus(1)
     }
 

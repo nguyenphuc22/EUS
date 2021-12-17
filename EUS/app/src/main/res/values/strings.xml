@@ -38,5 +38,7 @@
     <string name="Total_Price">Tổng Cộng</string>
     <string name="Buy">Mua Hàng</string>
     <string name="Delete">Xoá</string>
+    <string name="titlePrice">Tổng Tiền</string>
+    <string name="payment">Thanh Toán</string>
 
 </resources>

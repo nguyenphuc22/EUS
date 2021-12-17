@@ -1,9 +1,11 @@
 package com.example.eus.ViewCart
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eus.ODT.Cart
@@ -30,11 +32,25 @@ class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCa
 
             binding.txtPlus.setOnClickListener {
                 product?.let { it1 -> onClickCart.onClickPlus(product = it1) }
+                Log.i("AdapterCart",product?.mQuantity.toString())
+                onClickCart.onUpdatePrice(mCart.calc())
                 notifyDataSetChanged()
             }
 
             binding.txtMinus.setOnClickListener {
                 product?.let { it1 -> onClickCart.onClickMinus(product = it1) }
+                Log.i("AdapterCart",product?.mQuantity.toString())
+                onClickCart.onUpdatePrice(mCart.calc())
+                if (product?.mQuantity!! < 1) {
+                    mCart.delete(product)
+                }
+                notifyDataSetChanged()
+            }
+
+            binding.txtDelete.setOnClickListener {
+                if (product != null) {
+                    mCart.delete(product)
+                }
                 notifyDataSetChanged()
             }
         }
@@ -55,7 +71,11 @@ class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCa
         return mCart.getSize()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(cart : Cart) {
         mCart = cart
+        onClickCart.onUpdatePrice(mCart.calc())
+        notifyDataSetChanged()
     }
+
 }
