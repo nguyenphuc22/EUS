@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.util.Util
 import com.example.eus.ODT.Product
 import com.example.eus.R
 import com.example.eus.ViewCart.AdapterCart
@@ -31,8 +30,11 @@ class PaymentFragment : Fragment() , OnClickCart {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = AdapterCart(this)
-        com.example.eus.ViewHome.Util.fakeCart().observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+
+        com.example.eus.ViewHome.Util.fakeOrder()?.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it.mCart!!)
+            binding.includeInfo.txtTitle.text = Util.formatTitleInfo(it.mName!!,it.mPhone!!)
+            binding.includeTypePay.txtTitle.text = it.mPayment?.getType()
         })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)

@@ -1,6 +1,8 @@
 package com.example.eus.ViewHome
 
+import com.example.eus.ODT.COD
 import com.example.eus.ODT.Cart
+import com.example.eus.ODT.Order
 import com.example.eus.ODT.Product
 import java.text.NumberFormat
 import androidx.lifecycle.MutableLiveData as MutableLiveData
@@ -112,5 +114,52 @@ class Util {
             mutableLiveData.postValue(cart)
             return mutableLiveData
         }
+
+        fun fakeOrder() : MutableLiveData<Order>? {
+            val list = ArrayList<Product>()
+            val product = Product.Builder()
+                .addImage("https://upload.wikimedia.org/wikipedia/commons/0/0c/E-girl.png")
+                .addPrice(44000000.0)
+                .addTitle("Điện thoại")
+                .addQuantity(1)
+                .build()
+            list.add(product)
+            list.add(Product.Builder()
+                .addImage("https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/08/kimoanh-851-1620472406599.jpeg")
+                .addPrice(23000000.0)
+                .addTitle("Điện thoại đẹp")
+                .addQuantity(1)
+                .build())
+            list.add(Product.Builder()
+                .addImage("https://media.istockphoto.com/photos/lonly-young-woman-by-the-sea-picture-id840501418?b=1&k=20&m=840501418&s=170667a&w=0&h=2Smu2ybUDuZB120uKmQeEtegDXCTXHSLd3yL9GouwuQ=")
+                .addPrice(42000000.0)
+                .addTitle("Điện thoại đẹp")
+                .addQuantity(1)
+                .build())
+            list.add(Product.Builder()
+                .addImage("https://icdn.dantri.com.vn/thumb_w/640/2021/02/27/diem-danh-7-guong-mat-hot-girl-xinh-dep-noi-bat-trong-thang-2-docx-1614441453135.jpeg")
+                .addPrice(55000000.0)
+                .addTitle("Điện thoại đẹp")
+                .addQuantity(1)
+                .build())
+            list.add(Product.Builder()
+                .addImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk3O6wPUnvDOyGr-8Wbd6-lihTBhXQNfeCyg&usqp=CAU")
+                .addPrice(20000000.0)
+                .addTitle("Điện thoại đẹp")
+                .addQuantity(1)
+                .build())
+            val cart = Cart(list)
+            val order = Order.Builder()
+                .addAddress("1 Nguyen Van Cu, phuong 1, quan 5,  Ho Chi Minh")
+                .addCart(cart)
+                .addPayment(COD())
+                .addName("Thanh Bu Liem")
+                .addPhone("089xxxxx")
+                .build()
+           val mutableLiveData : MutableLiveData<Order> = MutableLiveData()
+            mutableLiveData.postValue(order)
+            return mutableLiveData
+        }
+
     }
 }

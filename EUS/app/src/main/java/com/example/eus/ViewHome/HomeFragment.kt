@@ -106,7 +106,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
                 if(hot_number==20){
                     tv.visibility=View.INVISIBLE}
-               // this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                //this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
             }
             R.id.itemSearch->{
 
@@ -145,7 +145,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
     override fun onCLickProduct(product: Product) {
         val productFake = Util.fakeProduct()
-        var action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productFake)
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productFake)
         findNavController().navigate(action)
     }
 
