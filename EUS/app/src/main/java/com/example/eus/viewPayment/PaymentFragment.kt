@@ -29,15 +29,21 @@ class PaymentFragment : Fragment() , OnClickCart {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         adapter = AdapterCart(this)
 
         com.example.eus.ViewHome.Util.fakeOrder()?.observe(viewLifecycleOwner, Observer {
             adapter.setData(it.mCart!!)
             binding.includeInfo.txtTitle.text = Util.formatTitleInfo(it.mName!!,it.mPhone!!)
-            binding.includeTypePay.txtTitle.text = it.mPayment?.getType()
+            binding.includeInfo.txtSubTitle.text = it.mAddress
+            binding.includeTypePay.txtSubTitle.text = it.mPayment?.getType()
         })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    fun initView() {
+        binding.includeTypePay.txtTitle.text = getString(R.string.payment)
     }
 
     override fun onClickPlus(product: Product) {
