@@ -125,6 +125,7 @@ class LoginFragment : Fragment() {
                 .build()
 
             viewModel.login(account)?.observe(viewLifecycleOwner, Observer {
+
                 if (it == null) {
 
                     Toast.makeText(context,"Fail" + it.toString(),Toast.LENGTH_SHORT).show()

@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
             .addName("ngphuc")
             .addUsername("8416")
             .addPassword("123")
+            .addAddress("mdf")
+            .addImage("234")
             .build()
 
         var a=firebaseDatabase.isExist(account)

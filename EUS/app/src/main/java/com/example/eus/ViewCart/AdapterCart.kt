@@ -51,6 +51,7 @@ class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCa
                 if (product != null) {
                     mCart.delete(product)
                 }
+                onClickCart.onUpdatePrice(mCart.calc())
                 notifyDataSetChanged()
             }
         }
