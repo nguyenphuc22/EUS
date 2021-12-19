@@ -48,9 +48,12 @@ class DetailFragment : Fragment() {
         binding.txtTitle.text = args.productDetail?.mTitle
         binding.txtPrice.text =Product().Util().convertToMoney(args.productDetail?.mPrice)
         binding.txtDescription.text = args.productDetail?.mDescription
-        adapterDetail = AdapterDetail(args.productDetail?.mDetails!!)
+        if (args.productDetail?.mDetails != null)
+        {
+            adapterDetail = args.productDetail?.mDetails?.let { AdapterDetail(it) }!!
+            binding.include.recyclerDetail.adapter = adapterDetail
+        }
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
-        binding.include.recyclerDetail.adapter = adapterDetail
         binding.txtAddCart.setOnClickListener{
             txtTv.visibility=View.VISIBLE
             size++;

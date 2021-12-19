@@ -146,7 +146,6 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
             override fun onQueryTextChange(newText: String): Boolean {
                 viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
-
                     adapterProduct.setProduct( it.filter { s -> s.mTitle!!.lowercase().contains(newText) })
                     it[2].mTitle?.let { it1 -> Log.i("well", it1) }
 
@@ -167,7 +166,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
     override fun onCLickProduct(product: Product) {
         val productFake = Util.fakeProduct()
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productFake)
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(product)
         findNavController().navigate(action)
     }
 
