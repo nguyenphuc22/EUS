@@ -132,6 +132,7 @@ class LoginFragment : Fragment() {
                 } else {
 
                     Toast.makeText(context,"Success" + it.toString(),Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
                 }
             })
