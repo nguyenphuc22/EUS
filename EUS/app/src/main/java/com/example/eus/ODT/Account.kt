@@ -8,8 +8,8 @@ data class Account (
     var mName : String? = null,
     var mDateOfBirth : Long? = null,
     var mEmail : String? = null,
-    var mImage : String? = null
-
+    var mImage : String? = null,
+    var mAddress : String? = null
     )
 {
    data class Builder(
@@ -20,7 +20,8 @@ data class Account (
        private var mName : String? = null,
        private var mDateOfBirth : Long? = null,
        private var mEmail : String? = null,
-       private var mImage : String? = null
+       private var mImage : String? = null,
+       private var mAddress: String? = null
    ) {
 
        fun addId(id : String) : Builder {
@@ -55,12 +56,20 @@ data class Account (
            this.mImage = url
            return this
        }
+
+       fun addAddress(address : String) : Builder {
+           this.mAddress = address
+           return this
+       }
+
        fun build() : Account {
-           return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail)
+           return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail,mImage,mAddress)
        }
 
        override fun toString(): String {
-           return "Builder(mId=$mId, mUsername=$mUsername, mPhone=$mPhone, mPassword=$mPassword, mName=$mName, mDateOfBirth=$mDateOfBirth, mEmail=$mEmail, mImage=$mImage)"
+           return "Builder(mId=$mId, mUsername=$mUsername, mPhone=$mPhone, mPassword=$mPassword, mName=$mName, mDateOfBirth=$mDateOfBirth, mEmail=$mEmail, mImage=$mImage, mAddress=$mAddress)"
        }
+
+
    }
 }

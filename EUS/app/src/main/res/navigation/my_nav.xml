@@ -125,5 +125,22 @@
         android:id="@+id/paymentFragment"
         android:name="com.example.eus.viewPayment.PaymentFragment"
         android:label="@string/payment"
-        tools:layout="@layout/fragment_payment" />
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_changInfoFragment"
+            app:destination="@id/changInfoFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_changePaymentFragment"
+            app:destination="@id/changePaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changInfoFragment"
+        android:name="com.example.eus.viewPayment.ChangeInfoFragment"
+        android:label="fragment_chang_info"
+        tools:layout="@layout/fragment_chang_info" />
+    <fragment
+        android:id="@+id/changePaymentFragment"
+        android:name="com.example.eus.viewPayment.ChangePaymentFragment"
+        android:label="fragment_change_payment"
+        tools:layout="@layout/fragment_change_payment" />
 </navigation>

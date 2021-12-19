@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eus.ODT.Product
 import com.example.eus.R
@@ -40,6 +41,14 @@ class PaymentFragment : Fragment() , OnClickCart {
         })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
+        binding.includeInfo.root.setOnClickListener {
+            this.findNavController().navigate(R.id.action_paymentFragment_to_changInfoFragment)
+        }
+
+        binding.includeTypePay.root.setOnClickListener {
+            this.findNavController().navigate(R.id.action_paymentFragment_to_changePaymentFragment)
+        }
     }
 
     fun initView() {

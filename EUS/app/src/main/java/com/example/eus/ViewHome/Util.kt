@@ -1,9 +1,7 @@
 package com.example.eus.ViewHome
 
-import com.example.eus.ODT.COD
-import com.example.eus.ODT.Cart
-import com.example.eus.ODT.Order
-import com.example.eus.ODT.Product
+import android.util.Log
+import com.example.eus.ODT.*
 import java.text.NumberFormat
 import androidx.lifecycle.MutableLiveData as MutableLiveData
 
@@ -161,5 +159,27 @@ class Util {
             return mutableLiveData
         }
 
+        fun fakeTypePayment() : MutableLiveData<ArrayList<Payment>> {
+            var cod = COD()
+            var momo = MoMo()
+            var payments = ArrayList<Payment>()
+            payments.add(cod)
+            payments.add(momo)
+            return MutableLiveData(payments)
+        }
+
+        fun fakeAccounts() : MutableLiveData<ArrayList<Account>> {
+            var accounts = ArrayList<Account>()
+            var account = Account.Builder()
+                .addName("Nick Seven")
+                .addAddress("15 Nguyen Trai")
+                .addPhone("089xxxxxx")
+                .build()
+            Log.i("Fake",account.toString())
+            accounts.add(account)
+            accounts.add(account)
+            accounts.add(account)
+            return MutableLiveData(accounts)
+        }
     }
 }
