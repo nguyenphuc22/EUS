@@ -32,15 +32,19 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/drawable/item_button.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/drawable/shapecorner_radius.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/action_bar_notifitcation_icon.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/form_cart_extend.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/form_detail_product.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/form_one_button_input.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/form_select.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/form_total_price.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/formtwoeditandbutton.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_chang_info.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_change_payment.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_forget.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/layout/fragment_list_type_product.xml" value="0.22592592592592592" />

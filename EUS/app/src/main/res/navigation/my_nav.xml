@@ -136,11 +136,11 @@
     <fragment
         android:id="@+id/changInfoFragment"
         android:name="com.example.eus.viewPayment.ChangeInfoFragment"
-        android:label="fragment_chang_info"
+        android:label="Thông Tin"
         tools:layout="@layout/fragment_chang_info" />
     <fragment
         android:id="@+id/changePaymentFragment"
         android:name="com.example.eus.viewPayment.ChangePaymentFragment"
-        android:label="fragment_change_payment"
+        android:label="Phương Thức Thanh Toán"
         tools:layout="@layout/fragment_change_payment" />
 </navigation>

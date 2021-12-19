@@ -13,7 +13,6 @@ class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
 
     class InfoViewHolder(var binding: ItemChangeInfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(account: Account) {
-            Log.i("AdapterInfo",account.toString())
             binding.txtTitle.text = Util.formatTitleInfo(account.mName, account.mPhone)
             binding.txtSubTitle.text = account.mAddress
         }
