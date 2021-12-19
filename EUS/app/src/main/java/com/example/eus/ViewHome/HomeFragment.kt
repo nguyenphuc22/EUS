@@ -22,6 +22,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.app.SearchManager
+import android.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.core.view.MenuItemCompat
+import androidx.core.view.isInvisible
 
 
 class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
@@ -56,7 +63,10 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         adapterProduct = AdapterProduct()
         adapterProduct.addOnClickItem(this)
         viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
-            adapterProduct.setProduct(it)
+
+            adapterProduct.setProduct( it )
+
+
 
         })
         auth= FirebaseAuth.getInstance()
@@ -88,7 +98,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val currentUser = auth.currentUser
+
 
         when(item.itemId) {
             R.id.itemProfile -> {
@@ -112,12 +122,41 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         inflater.inflate(R.menu.main_menu, menu)
         val badgeLayout = menu.findItem(R.id.itemCart).actionView as RelativeLayout
         txtTv = badgeLayout.findViewById<View>(R.id.count) as TextView
+        txtTv.visibility = View.INVISIBLE
         Util.fakeCart().observe(viewLifecycleOwner, Observer {
-            txtTv.text = it.getSize().toString()
+
+            if(it.getSize()!=0){
+                txtTv.visibility=View.VISIBLE
+                txtTv.text=it.getSize().toString()
+            }
+
+
         })
         badgeLayout.setOnClickListener {
             onOptionsItemSelected(menu.findItem(R.id.itemCart));
         }
+
+        val searchView = menu.findItem(R.id.itemSearch).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Log.i("well", " this worked 1 $query")
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
+
+                    adapterProduct.setProduct( it.filter { s -> s.mTitle!!.lowercase().contains(newText) })
+                    it[2].mTitle?.let { it1 -> Log.i("well", it1) }
+
+
+                })
+                Log.i("well", " this worked 2 $newText")
+                return false
+            }
+        })
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 

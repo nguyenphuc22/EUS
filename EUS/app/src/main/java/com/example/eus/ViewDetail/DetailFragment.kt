@@ -4,15 +4,19 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.annotation.RequiresApi
 import androidx.core.view.get
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.ViewHome.Util
 import com.example.eus.databinding.FragmentDetailBinding
 
 
@@ -21,6 +25,8 @@ class DetailFragment : Fragment() {
     private lateinit var binding : FragmentDetailBinding
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var adapterDetail: AdapterDetail
+    private lateinit var txtTv :TextView
+    private  var size =0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +51,11 @@ class DetailFragment : Fragment() {
         adapterDetail = AdapterDetail(args.productDetail?.mDetails!!)
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
         binding.include.recyclerDetail.adapter = adapterDetail
+        binding.txtAddCart.setOnClickListener{
+            txtTv.visibility=View.VISIBLE
+            size++;
+            txtTv.text=size.toString()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +66,7 @@ class DetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.itemCart->{
-                this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                this.findNavController().navigate(R.id.action_detailFragment_to_cartFragment)
             }
 
         }
@@ -66,6 +77,23 @@ class DetailFragment : Fragment() {
         inflater.inflate(R.menu.main_menu, menu)
         var itemSearch : MenuItem = menu.findItem(R.id.itemSearch)
         itemSearch.isVisible = false
+        val badgeLayout = menu.findItem(R.id.itemCart).actionView as RelativeLayout
+        txtTv = badgeLayout.findViewById<View>(R.id.count) as TextView
+        txtTv.visibility = View.INVISIBLE
+        Util.fakeCart().observe(viewLifecycleOwner, Observer {
+
+            if(it.getSize()!=0){
+                txtTv.visibility=View.VISIBLE
+                txtTv.text=it.getSize().toString()
+                size=it.getSize()
+            }
+
+
+        })
+        badgeLayout.setOnClickListener {
+            onOptionsItemSelected(menu.findItem(R.id.itemCart));
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
