@@ -74,21 +74,21 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
         if(auth.currentUser!=null){
-        var account = Account.Builder()
-            .addUsername(auth.currentUser?.email.toString())
-            .addName(auth.currentUser?.displayName.toString())
-            .addEmail(auth.currentUser?.email.toString())
-            .addDateOfBirth(0)
-            .addId("")
-            .addPhone("")
-            .build()
-        viewModel.isExist(account).observe(viewLifecycleOwner, {
-            Log.i("test123",it.toString())
+            var account = Account.Builder()
+                .addUsername(auth.currentUser?.email.toString())
+                .addName(auth.currentUser?.displayName.toString())
+                .addEmail(auth.currentUser?.email.toString())
+                .addDateOfBirth(0)
+                .addId("")
+                .addPhone("")
+                .build()
+            viewModel.isExist(account).observe(viewLifecycleOwner, {
+                Log.i("test123",it.toString())
 
-            if(it==false){
-                viewModel.register(account)
-            }
-        })
+                if(it==false){
+                    viewModel.register(account)
+                }
+            })
         }
     }
 
@@ -102,11 +102,11 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
         when(item.itemId) {
             R.id.itemProfile -> {
-                   if(sharedPref.getState(activity).equals("isLogged")){
-                       this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
-                   }else{
-                       this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-                   }
+                if(sharedPref.getState(activity).equals("isLogged")){
+                    this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+                }else{
+                    this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                }
             }
             R.id.itemCart->{
                 this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)

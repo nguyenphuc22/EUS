@@ -7,6 +7,7 @@ import com.example.eus.FirebaseApi.FireApiDatabase
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.FirebaseApi.Firestore
 import com.example.eus.ODT.Account
+import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 import com.example.eus.ViewHome.Util
 
@@ -72,5 +73,21 @@ class AccountRepository : Repository {
 
     override fun getListProduct(type: String): MutableLiveData<List<Product>> {
         return firebaseRealTime.getListProduct(type)
+    }
+
+    override fun setUser(username: String, account: Account) {
+        return firebaseRealTime.setUser(username, account)
+    }
+
+    override fun addCart(product: Product, username: String) {
+        firebaseRealTime.addCart(product, username)
+    }
+
+    override fun getCart(username: String): MutableLiveData<Cart> {
+        return firebaseRealTime.getCart(username)
+    }
+
+    override fun search(nameProduct: String): MutableLiveData<List<Product>> {
+        return firebaseRealTime.search(nameProduct)
     }
 }
