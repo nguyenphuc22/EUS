@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.SharePref.ManagerSharePref
 import com.example.eus.ViewHome.Util
+import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentCartBinding
 
 
@@ -20,7 +23,8 @@ class CartFragment : Fragment(), OnClickCart {
 
     private lateinit var binding : FragmentCartBinding
     private lateinit var adapterCart: AdapterCart
-
+    private lateinit var viewModel : EUSViewModel
+    private lateinit var sharedPref: ManagerSharePref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,13 +35,20 @@ class CartFragment : Fragment(), OnClickCart {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
+        sharedPref= ManagerSharePref()
         initView()
         adapterCart = AdapterCart(this)
-        Util.fakeCart().observe(viewLifecycleOwner, Observer {
-            Log.i("Cart",it.toString())
+//        Util.fakeCart().observe(viewLifecycleOwner, Observer {
+//            Log.i("Cart",it.toString())
+//            adapterCart.setData(it)
+//        })
+        viewModel.getCart(sharedPref.getAccount(activity)!!).observe(viewLifecycleOwner, Observer {
             adapterCart.setData(it)
         })
+
         binding.recyclerCart.layoutManager = LinearLayoutManager(context)
         binding.recyclerCart.adapter = adapterCart
 

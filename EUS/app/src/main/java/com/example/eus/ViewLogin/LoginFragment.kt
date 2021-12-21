@@ -123,7 +123,7 @@ class LoginFragment : Fragment() {
                 .addUsername(binding.itemLogin.textOne.text.toString())
                 .addPassword(binding.itemLogin.textTwo.text.toString())
                 .build()
-
+            var username:String = binding.itemLogin.textOne.text.toString()
             viewModel.login(account)?.observe(viewLifecycleOwner, Observer {
 
                 if (it == null) {
@@ -133,6 +133,8 @@ class LoginFragment : Fragment() {
                 } else {
 
                     Toast.makeText(context,"Success" + it.toString(),Toast.LENGTH_SHORT).show()
+                    sharePref.setState(activity,"isLogged")
+                    sharePref.setAccount(activity,username)
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
                 }

@@ -37,6 +37,7 @@ class ProfileFragment : Fragment() {
                 .signOut()
 
             sharedPref.setState(activity,"")
+            sharedPref.setAccount(activity,"")
             Navigation.findNavController(binding.btnLogout).navigate(R.id.homeFragment)
         }
 

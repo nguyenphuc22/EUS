@@ -10,13 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.annotation.RequiresApi
 import androidx.core.view.get
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.SharePref.ManagerSharePref
 import com.example.eus.ViewHome.Util
+import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentDetailBinding
 
 
@@ -27,6 +30,8 @@ class DetailFragment : Fragment() {
     private lateinit var adapterDetail: AdapterDetail
     private lateinit var txtTv :TextView
     private  var size =0
+    private lateinit var viewModel : EUSViewModel
+    private lateinit var sharedPref: ManagerSharePref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +43,9 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
+        sharedPref= ManagerSharePref()
+
         Glide.with(this)
             .load(args.productDetail?.mImage)
             .fitCenter()
@@ -56,9 +64,15 @@ class DetailFragment : Fragment() {
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
         binding.txtAddCart.setOnClickListener{
             txtTv.visibility=View.VISIBLE
-            size++;
-            txtTv.text=size.toString()
+            viewModel.addCart(args.productDetail!!,sharedPref.getAccount(activity)!!)
+            viewModel.getCart(sharedPref.getAccount(activity)!!).observe(viewLifecycleOwner, Observer {
+                if(it.getSize()!=0){
+                    txtTv.visibility=View.VISIBLE
+                    txtTv.text=it.getSize().toString()
+                }
+            })
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,16 +97,13 @@ class DetailFragment : Fragment() {
         val badgeLayout = menu.findItem(R.id.itemCart).actionView as RelativeLayout
         txtTv = badgeLayout.findViewById<View>(R.id.count) as TextView
         txtTv.visibility = View.INVISIBLE
-        Util.fakeCart().observe(viewLifecycleOwner, Observer {
-
+        viewModel.getCart(sharedPref.getAccount(activity)!!).observe(viewLifecycleOwner, Observer {
             if(it.getSize()!=0){
                 txtTv.visibility=View.VISIBLE
                 txtTv.text=it.getSize().toString()
-                size=it.getSize()
             }
-
-
         })
+
         badgeLayout.setOnClickListener {
             onOptionsItemSelected(menu.findItem(R.id.itemCart));
         }
