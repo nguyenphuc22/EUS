@@ -46,33 +46,9 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
-        adapterCategory = AdapterCategory()
-        adapterCategory.addOnClickCategory(this)
-        viewModel.getCategory()?.observe(viewLifecycleOwner, Observer {
-            adapterCategory.setData(it)
-        })
-        binding.recyclerCategory.layoutManager = GridLayoutManager(context,5)
-        binding.recyclerCategory.adapter = adapterCategory
-
-        adapterProduct = AdapterProduct()
-        adapterProduct.addOnClickItem(this)
-        viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
-
-            adapterProduct.setProduct( it )
-
-
-
-        })
         auth= FirebaseAuth.getInstance()
         sharedPref= ManagerSharePref()
-        binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
-        binding.recyclerListProduct.adapter = adapterProduct
         if(auth.currentUser!=null){
             sharedPref.setAccount(activity,auth.currentUser?.email.toString().replace(".",""))
             var account = Account.Builder()
@@ -91,6 +67,33 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
                 }
             })
         }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        adapterCategory = AdapterCategory()
+        adapterCategory.addOnClickCategory(this)
+        viewModel.getCategory()?.observe(viewLifecycleOwner, Observer {
+            adapterCategory.setData(it)
+        })
+        binding.recyclerCategory.layoutManager = GridLayoutManager(context,5)
+        binding.recyclerCategory.adapter = adapterCategory
+
+        adapterProduct = AdapterProduct()
+        adapterProduct.addOnClickItem(this)
+        viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
+
+            adapterProduct.setProduct( it )
+
+
+
+        })
+
+        binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerListProduct.adapter = adapterProduct
+
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
 
 //        viewModel.setUser("abc", Util.fakeAccounts())
