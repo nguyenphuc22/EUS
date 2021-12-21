@@ -148,8 +148,24 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
             override fun onQueryTextChange(newText: String): Boolean {
                 viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
-                    adapterProduct.setProduct( it.filter { s -> s.mTitle!!.lowercase().contains(newText) })
-                    it[2].mTitle?.let { it1 -> Log.i("well", it1) }
+                   var list:ArrayList<Product> = it.filter { s -> s.mTitle!!.lowercase().contains(newText) } as ArrayList<Product>
+                    var list1:ArrayList<Product> = it.filter { s -> s.mPrice!!.toBigDecimal().toPlainString().contains(newText) } as ArrayList<Product>
+                    var list2:ArrayList<Product> = it.filter { s -> s.mType!!.lowercase().contains(newText) } as ArrayList<Product>
+
+                    var list3:ArrayList<Product>
+                    if(it.filter { s -> s.mTitle!!.lowercase().contains(newText) }.isNotEmpty()){
+
+                    }
+                    if(list.isNotEmpty()){
+                    adapterProduct.setProduct( list)
+                    }
+                    if(list1.isNotEmpty()){
+                    adapterProduct.setProduct( list1)
+                }
+                    if(list2.isNotEmpty()){
+                    adapterProduct.setProduct( list2)
+                }
+
 
 
                 })
