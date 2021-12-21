@@ -74,22 +74,25 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
         if(auth.currentUser!=null){
-        var account = Account.Builder()
-            .addUsername(auth.currentUser?.email.toString())
-            .addName(auth.currentUser?.displayName.toString())
-            .addEmail(auth.currentUser?.email.toString())
-            .addDateOfBirth(0)
-            .addId("")
-            .addPhone("")
-            .build()
-        viewModel.isExist(account).observe(viewLifecycleOwner, {
-            Log.i("test123",it.toString())
+            sharedPref.setAccount(activity,auth.currentUser?.email.toString().replace(".",""))
+            var account = Account.Builder()
+                .addUsername(auth.currentUser?.email.toString())
+                .addName(auth.currentUser?.displayName.toString())
+                .addEmail(auth.currentUser?.email.toString())
+                .addDateOfBirth(0)
+                .addId("")
+                .addPhone("")
+                .build()
+            viewModel.isExist(account).observe(viewLifecycleOwner, {
+                Log.i("test123",it.toString())
 
-            if(it==false){
-                viewModel.register(account)
-            }
-        })
+                if(it==false){
+                    viewModel.register(account)
+                }
+            })
         }
+        Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,11 +105,11 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
         when(item.itemId) {
             R.id.itemProfile -> {
-                   if(sharedPref.getState(activity).equals("isLogged")){
-                       this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
-                   }else{
-                       this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-                   }
+                if(sharedPref.getState(activity).equals("isLogged")){
+                    this.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+                }else{
+                    this.findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                }
             }
             R.id.itemCart->{
                 this.findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
@@ -123,15 +126,14 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         val badgeLayout = menu.findItem(R.id.itemCart).actionView as RelativeLayout
         txtTv = badgeLayout.findViewById<View>(R.id.count) as TextView
         txtTv.visibility = View.INVISIBLE
-        Util.fakeCart().observe(viewLifecycleOwner, Observer {
-
+        viewModel.getCart(sharedPref.getAccount(activity)!!).observe(viewLifecycleOwner, Observer {
             if(it.getSize()!=0){
                 txtTv.visibility=View.VISIBLE
                 txtTv.text=it.getSize().toString()
             }
 
-
         })
+
         badgeLayout.setOnClickListener {
             onOptionsItemSelected(menu.findItem(R.id.itemCart));
         }

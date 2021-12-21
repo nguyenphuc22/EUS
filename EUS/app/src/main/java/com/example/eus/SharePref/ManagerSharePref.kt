@@ -9,15 +9,37 @@ class ManagerSharePref : SharedPref {
         if (sharedPref != null) {
             with (sharedPref.edit()) {
                 putString("isLogin",state)
+
                 apply()
             }
         }
     }
 
+
     override fun getState(activity: Activity?): String? {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         if (sharedPref != null) {
            return sharedPref.getString("isLogin","false")
+        }
+        return "get failed"
+    }
+
+
+    override fun setAccount(activity: Activity?,account:String){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            with (sharedPref.edit()) {
+                putString("username",account)
+
+                apply()
+            }
+        }
+
+    }
+    override fun getAccount(activity: Activity?): String? {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            return sharedPref.getString("username","false")
         }
         return "get failed"
     }

@@ -31,9 +31,9 @@ class ChangeInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         adapter = AdapterInfo()
-        Util.fakeAccounts().observe(viewLifecycleOwner, Observer {
-            adapter.setAccounts(it)
-        })
+//        Util.fakeAccounts().observe(viewLifecycleOwner, Observer {
+//            adapter.setAccounts(it)
+//        })
         binding.recyclerInfo.adapter = adapter
         binding.recyclerInfo.layoutManager = LinearLayoutManager(context)
     }

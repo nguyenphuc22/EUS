@@ -31,4 +31,7 @@ data class Cart(
         products.remove(product)
     }
 
+    fun getCart(): ArrayList<Product>{
+        return products
+    }
 }

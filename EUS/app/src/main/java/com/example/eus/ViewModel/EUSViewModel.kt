@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.eus.Model.AccountRepository
 import com.example.eus.ODT.Account
+import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 import com.example.eus.ViewHome.Util
 import kotlinx.coroutines.Dispatchers
@@ -64,5 +65,21 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getListProduct(type: String): MutableLiveData<List<Product>>{
         return repository.getListProduct(type)
+    }
+
+    fun setUser(username: String, account: Account){
+        return repository.setUser(username, account)
+    }
+
+    fun addCart(product: Product, username: String){
+        return repository.addCart(product, username)
+    }
+
+    fun getCart(username: String): MutableLiveData<Cart>{
+        return repository.getCart(username)
+    }
+
+    fun search(nameProduct: String): MutableLiveData<List<Product>>{
+        return repository.search(nameProduct)
     }
 }

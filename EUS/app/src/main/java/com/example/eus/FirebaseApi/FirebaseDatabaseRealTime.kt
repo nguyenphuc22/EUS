@@ -3,6 +3,7 @@ package com.example.eus.FirebaseApi
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.eus.ODT.Account
+import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -195,5 +196,89 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         })
 
         return mutableLiveData
+    }
+
+    override fun search(nameProduct: String): MutableLiveData<List<Product>> {
+        var mutableLiveData: MutableLiveData<List<Product>> = MutableLiveData()
+        var list= ArrayList<Product>()
+        database= Firebase.database.getReference("Products")
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(productSnapshot in snapshot.children){
+                        val product = productSnapshot.getValue(Product::class.java)
+                        if(product?.mName?.replace("\\s".toRegex(), "")?.lowercase() == nameProduct.replace("\\s".toRegex(), "").lowercase()){
+                            list.add(product)
+                        }
+                    }
+                    if(list.isEmpty()){
+                        mutableLiveData.postValue(null)
+                    }
+                    else{
+                        mutableLiveData.postValue(list)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+    }
+
+    override fun addCart(product: Product, username: String) {
+        database= FirebaseDatabase.getInstance().getReference("Cart")
+        var id= database.push().key
+        database.child(username).child(id.toString()).setValue(product)
+    }
+
+    override fun getCart(username: String): MutableLiveData<Cart> {
+        var mutableLiveData: MutableLiveData<Cart> = MutableLiveData()
+        var list= ArrayList<Product>()
+        database= FirebaseDatabase.getInstance().getReference("Cart").child(username)
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(productSnapshot in snapshot.children){
+                        val product= productSnapshot.getValue(Product::class.java)
+                        list.add(product!!)
+                    }
+                    var cart = Cart(list)
+                    mutableLiveData.postValue(cart)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+
+    }
+
+    override fun setUser(username: String, account: Account) {
+        database= Firebase.database.getReference("Accounts")
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(accSnapshot in snapshot.children){
+                        val acc = accSnapshot.getValue(Account::class.java)
+                        if(acc?.mUsername == username){
+                            Log.i("TestSetUsername", accSnapshot.key.toString())
+                            database.child(accSnapshot.key.toString()).setValue(account)
+                            break
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
