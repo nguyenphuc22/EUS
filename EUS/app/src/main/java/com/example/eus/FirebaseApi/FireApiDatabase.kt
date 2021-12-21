@@ -6,7 +6,8 @@ import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 
 interface FireApiDatabase {
-    fun getAccout1(account: Account) : MutableLiveData<Account>
+    fun getAccout1(account: Account): MutableLiveData<Account>
+    fun getAccout(username: String) : MutableLiveData<Account>
     fun pushAccount(account: Account): MutableLiveData<Boolean>
     fun getProductType(): MutableLiveData<List<String>>
     fun isExist(account: Account):MutableLiveData<Boolean>

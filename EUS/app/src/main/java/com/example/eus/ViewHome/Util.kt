@@ -168,18 +168,19 @@ class Util {
             return MutableLiveData(payments)
         }
 
-        fun fakeAccounts() : MutableLiveData<ArrayList<Account>> {
-            var accounts = ArrayList<Account>()
+        fun fakeAccounts() : Account {
+//            var accounts = ArrayList<Account>()
             var account = Account.Builder()
                 .addName("Nick Seven")
                 .addAddress("15 Nguyen Trai")
                 .addPhone("089xxxxxx")
                 .build()
             Log.i("Fake",account.toString())
-            accounts.add(account)
-            accounts.add(account)
-            accounts.add(account)
-            return MutableLiveData(accounts)
+//            accounts.add(account)
+//            accounts.add(account)
+//            accounts.add(account)
+//            return MutableLiveData(accounts)
+            return account
         }
     }
 }

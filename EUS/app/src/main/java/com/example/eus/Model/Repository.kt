@@ -6,6 +6,7 @@ import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 
 interface Repository {
+    fun getAccount(username: String): MutableLiveData<Account>
     fun getAccountMutableLiveData(): MutableLiveData<Account>
     fun login(account : Account): MutableLiveData<Account>?
     fun loginGoogle(): Account?

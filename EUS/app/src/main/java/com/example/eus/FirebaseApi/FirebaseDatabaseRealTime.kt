@@ -124,6 +124,50 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         return isAccount
     }
 
+    override fun getAccout(username: String) : MutableLiveData<Account> {
+        var accountTmp : MutableLiveData<Account>
+        accountTmp = MutableLiveData()
+        var nulacc : Account?
+        nulacc=null
+        database=Firebase.database.getReference("Accounts")
+        database.addChildEventListener(object :ChildEventListener{
+
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                var tmp=snapshot.getValue<Account>()
+                if(username== tmp?.mUsername){
+                    accountTmp.postValue(tmp)
+                    Log.i("TEST2", accountTmp.toString())
+                }
+                else
+                    accountTmp.postValue(nulacc)
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                var a=snapshot.getValue<Account>()
+                Log.i("TEST1111",a.toString())
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                var a=snapshot.getValue<Account>()
+                Log.i("TEST2222",a.toString())
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                var a=snapshot.getValue<Account>()
+                Log.i("TEST3333",a.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.i("MainActivity:GetAccout",error.message)
+            }
+
+        })
+
+
+
+        return accountTmp
+    }
+
     override fun getProductType(): MutableLiveData<List<String>>{
         var mutableLiveData : MutableLiveData<List<String>> = MutableLiveData()
         var list= ArrayList<String>()
