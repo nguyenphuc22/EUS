@@ -26,12 +26,16 @@ class AccountRepository : Repository {
         firebaseRealTime= FirebaseDatabaseRealTime()
     }
 
+    override fun getAccount(username: String): MutableLiveData<Account> {
+        return firebaseRealTime.getAccout(username)
+    }
+
     override fun getAccountMutableLiveData(): MutableLiveData<Account> {
         return accounts
     }
 
     override fun login(account : Account): MutableLiveData<Account>? {
-
+//        return null
         return firebaseRealTime.getAccout1(account)
     }
 

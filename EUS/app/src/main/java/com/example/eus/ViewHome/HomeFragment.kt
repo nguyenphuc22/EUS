@@ -93,7 +93,10 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         }
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
 
+//        viewModel.setUser("abc", Util.fakeAccounts())
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
