@@ -18,6 +18,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
 
 
     override fun getAccout1(account: Account) : MutableLiveData<Account> {
+        var isTrue : Boolean = true
         var accountTmp : MutableLiveData<Account>
         accountTmp = MutableLiveData()
         var nulacc : Account?
@@ -27,16 +28,23 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 var tmp=snapshot.getValue<Account>()
-                if(account.mUsername== tmp?.mUsername){
-                    if(account.mPassword==tmp?.mPassword) {
-                        accountTmp.postValue(tmp)
-                        Log.i("TEST2", accountTmp.toString())
+                if (isTrue) {
+                    if(account.mUsername== tmp?.mUsername){
+                        if(account.mPassword==tmp?.mPassword) {
+                            accountTmp.postValue(tmp)
+                            Log.i("TEST1", tmp.toString())
+                            Log.i("TEST2", accountTmp.toString())
+                            isTrue = false
+                        } else {
+                            Log.i("TEST3", nulacc.toString())
+                            accountTmp.postValue(nulacc)
+                        }
                     } else {
+                        Log.i("TEST4", nulacc.toString())
                         accountTmp.postValue(nulacc)
                     }
                 }
-                else
-                    accountTmp.postValue(nulacc)
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -127,8 +135,6 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     override fun getAccout(username: String) : MutableLiveData<Account> {
         var accountTmp : MutableLiveData<Account>
         accountTmp = MutableLiveData()
-        var nulacc : Account?
-        nulacc=null
         database=Firebase.database.getReference("Accounts")
         database.addChildEventListener(object :ChildEventListener{
 
@@ -138,8 +144,6 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                     accountTmp.postValue(tmp)
                     Log.i("TEST2", accountTmp.toString())
                 }
-                else
-                    accountTmp.postValue(nulacc)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

@@ -1,5 +1,6 @@
 package com.example.eus.ViewProfile
 
+import android.accounts.Account
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -9,9 +10,11 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.util.Util
 import com.example.eus.R
 import com.example.eus.SharePref.ManagerSharePref
@@ -57,9 +60,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
         sharedPref = ManagerSharePref()
-        viewModel.getAccount(sharedPref.getAccount(activity).toString()).observe(viewLifecycleOwner,
+        viewModel.getAccount(sharedPref.getAccount(activity).toString())?.observe(viewLifecycleOwner,
             Observer {
-                Log.i("Profile",it.toString())
                 if (it.mName != null) {
                     binding.editName.text = Editable.Factory.getInstance().newEditable(it.mName)
                 }
@@ -73,6 +75,23 @@ class ProfileFragment : Fragment() {
                     binding.txtPhoneInfor.text = Editable.Factory.getInstance().newEditable(it.mPhone)
                 }
             })
+
+        binding.btnSave.setOnClickListener {
+            Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
+            val account = com.example.eus.ODT.Account.Builder()
+                .addName(binding.editName.text.toString())
+                .addEmail(binding.editMail.text.toString())
+                .addPhone(binding.txtPhoneInfor.text.toString())
+                .addUsername(sharedPref.getAccount(activity).toString())
+                .addPassword(binding.editPassword.text.toString())
+                .build()
+            viewModel.setUser(sharedPref.getAccount(activity).toString(),account = account)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+        }
     }
+
 
 }
