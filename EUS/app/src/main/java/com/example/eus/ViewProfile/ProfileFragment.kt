@@ -1,16 +1,21 @@
 package com.example.eus.ViewProfile
 
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.bumptech.glide.util.Util
 import com.example.eus.R
 import com.example.eus.SharePref.ManagerSharePref
+import com.example.eus.SharePref.SharedPref
 import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -51,7 +56,23 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
+        sharedPref = ManagerSharePref()
+        viewModel.getAccount(sharedPref.getAccount(activity).toString()).observe(viewLifecycleOwner,
+            Observer {
+                Log.i("Profile",it.toString())
+                if (it.mName != null) {
+                    binding.editName.text = Editable.Factory.getInstance().newEditable(it.mName)
+                }
+                if (it.mEmail != null) {
+                    binding.editMail.text = Editable.Factory.getInstance().newEditable(it.mEmail)
+                }
+                if (it.mPassword != null) {
+                    binding.editPassword.text = Editable.Factory.getInstance().newEditable(it.mPassword)
+                }
+                if (it.mPhone != null) {
+                    binding.txtPhoneInfor.text = Editable.Factory.getInstance().newEditable(it.mPhone)
+                }
+            })
     }
-
 
 }
