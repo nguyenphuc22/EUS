@@ -1,8 +1,10 @@
 package com.example.eus.ODT
 
 data class Cart(
-    private var products : ArrayList<Product>
-) {
+    private var products: ArrayList<Product>
+)
+{
+
     fun calc() : Double {
         var price : Double = 0.0
         for (product in products) {
@@ -33,5 +35,9 @@ data class Cart(
 
     fun getCart(): ArrayList<Product>{
         return products
+    }
+
+    fun getProducts(): ArrayList<Product> {
+        return this.products
     }
 }

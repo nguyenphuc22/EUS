@@ -3,15 +3,12 @@ package com.example.eus.ViewCart
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
 import com.example.eus.R
-import com.example.eus.databinding.FragmentCartBinding
 import com.example.eus.databinding.ItemCartBinding
 
 class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCart.CartViewHolder>() {
@@ -73,7 +70,7 @@ class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCa
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(cart : Cart) {
+    fun setData(cart: Cart) {
         mCart = cart
         onClickCart.onUpdatePrice(mCart.calc())
         notifyDataSetChanged()

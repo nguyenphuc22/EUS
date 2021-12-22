@@ -122,7 +122,7 @@ data class Product(
         parcel.writeString(mDescription)
         parcel.writeValue(mQuantity)
         parcel.writeString(mName)
-        parcel.writeStringList(mDetails)
+        parcel.writeStringList(mDetails)    
     }
 
     override fun describeContents(): Int {

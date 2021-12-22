@@ -9,7 +9,8 @@ data class Account (
     var mDateOfBirth : Long? = null,
     var mEmail : String? = null,
     var mImage : String? = null,
-    var mAddress : String? = null
+    var mAddress : String? = null,
+    var mShipInfos : ArrayList<ShipInfo>? = null
     )
 {
    data class Builder(
@@ -21,7 +22,8 @@ data class Account (
        private var mDateOfBirth : Long? = null,
        private var mEmail : String? = null,
        private var mImage : String? = null,
-       private var mAddress: String? = null
+       private var mAddress: String? = null,
+       private var mShipInfos : ArrayList<ShipInfo>? = null
    ) {
 
        fun addId(id : String) : Builder {
@@ -62,13 +64,16 @@ data class Account (
            return this
        }
 
-       fun build() : Account {
-           return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail,mImage,mAddress)
+       fun addShipInfos(shipInfos: ArrayList<ShipInfo>) : Builder {
+           this.mShipInfos = shipInfos
+           return this
        }
 
-       override fun toString(): String {
-           return "Builder(mId=$mId, mUsername=$mUsername, mPhone=$mPhone, mPassword=$mPassword, mName=$mName, mDateOfBirth=$mDateOfBirth, mEmail=$mEmail, mImage=$mImage, mAddress=$mAddress)"
+       fun build() : Account {
+           return Account(mId,mUsername,mPhone,mPassword,mName,mDateOfBirth,mEmail,mImage,mAddress,mShipInfos)
        }
+
+
 
 
    }

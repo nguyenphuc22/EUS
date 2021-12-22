@@ -2,7 +2,6 @@ package com.example.eus.ViewHome
 
 import android.util.Log
 import com.example.eus.ODT.*
-import java.text.NumberFormat
 import androidx.lifecycle.MutableLiveData as MutableLiveData
 
 class Util {
