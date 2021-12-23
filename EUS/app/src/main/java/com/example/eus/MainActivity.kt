@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.ODT.Account
+import com.example.eus.ODT.ShipInfo
 import com.example.eus.databinding.ActivityMainBinding
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -33,7 +34,27 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         val firebaseDatabase = FirebaseDatabaseRealTime()
+        var ship =ShipInfo.Builder()
+            .addAddress("add")
+            .addId("1")
+            .addName("A")
+            .addPhone(phone = "090").build()
+        var ship1 =ShipInfo.Builder()
+            .addAddress("add")
+            .addId("2")
+            .addName("B")
+            .addPhone(phone = "090").build()
+        var ship2 =ShipInfo.Builder()
+            .addAddress("add")
+            .addId("2")
+            .addName("C")
+            .addPhone(phone = "090").build()
 
+        var b:ArrayList<ShipInfo>
+        b= ArrayList<ShipInfo>()
+        b.add(ship)
+        b.add(ship1)
+        b.add(ship2)
         var account = Account.Builder()
             .addId("7")
             .addDateOfBirth(15)
@@ -41,20 +62,14 @@ class MainActivity : AppCompatActivity() {
             .addImage("url")
             .addPhone("phone")
             .addName("ngphuc")
-            .addUsername("8416")
+            .addUsername("8416456")
             .addPassword("123")
             .addAddress("mdf")
-            .addImage("234")
+            .addShipInfos(b)
             .build()
 
-        var a=firebaseDatabase.isExist(account)
+        var a=firebaseDatabase.pushAccount(account)
 
-        a.observe(this, Observer {
-            if(it!=null)
-                Log.i("MainActivity:GetAccout",it.toString())
-            else
-                Log.i("MainActivity:GetAccout","null")
-        })
 
         setupActionBarWithNavController(navController)
     }
