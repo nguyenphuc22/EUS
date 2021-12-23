@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eus.ODT.ShipInfo
 import com.example.eus.R
 import com.example.eus.SharePref.ManagerSharePref
 import com.example.eus.SharePref.SharedPref
@@ -17,7 +18,7 @@ import com.example.eus.ViewModel.EUSViewModel
 import com.example.eus.databinding.FragmentChangInfoBinding
 
 
-class ChangeInfoFragment : Fragment() {
+class ChangeInfoFragment : Fragment(), OnClickItem {
 
     private lateinit var binding : FragmentChangInfoBinding
     private lateinit var adapter : AdapterInfo
@@ -36,11 +37,11 @@ class ChangeInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         sharedPref = ManagerSharePref()
-        adapter = AdapterInfo()
+        adapter = AdapterInfo(this)
         viewModel = ViewModelProvider(this).get(EUSViewModel::class.java)
-        viewModel.getAccount(sharedPref.getAccount(activity).toString())?.observe(viewLifecycleOwner,
+        viewModel.getShipInfoAll(sharedPref.getAccount(activity).toString()).observe(viewLifecycleOwner,
             Observer {
-                it.mShipInfos?.let { it1 -> adapter.setAccounts(it1) }
+                adapter.setShipInfos(it as ArrayList<ShipInfo>)
             })
         binding.recyclerInfo.adapter = adapter
         binding.recyclerInfo.layoutManager = LinearLayoutManager(context)
@@ -73,6 +74,16 @@ class ChangeInfoFragment : Fragment() {
 
     private fun initView() {
 
+    }
+
+    override fun OnCLickMenuUpdate(shipInfo: ShipInfo) {
+        val action = ChangeInfoFragmentDirections.actionChangInfoFragmentToAddInfoFragment(shipInfo)
+        this.findNavController().navigate(action)
+    }
+
+    override fun OnClickMenuDelete(shipInfo: ShipInfo) {
+        viewModel.deleteShipInfo(
+            sharedPref.getAccount(activity).toString(),shipInfoId = shipInfo.id.toString())
     }
 
 }

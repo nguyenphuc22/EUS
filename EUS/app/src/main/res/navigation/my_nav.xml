@@ -150,9 +150,6 @@
         <action
             android:id="@+id/action_changInfoFragment_to_addInfoFragment"
             app:destination="@id/addInfoFragment" />
-        <argument
-            android:name="shipInfo"
-            app:argType="com.example.eus.ODT.ShipInfo" />
         <action
             android:id="@+id/action_changInfoFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
@@ -170,5 +167,10 @@
         <action
             android:id="@+id/action_addInfoFragment_to_changInfoFragment"
             app:destination="@id/changInfoFragment" />
+        <argument
+            android:name="shipInfo"
+            app:argType="com.example.eus.ODT.ShipInfo"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

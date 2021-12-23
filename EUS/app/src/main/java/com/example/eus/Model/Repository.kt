@@ -30,6 +30,6 @@ interface Repository {
     fun updateShipInfo(username: String, shipInfo: ShipInfo)
     fun deleteShipInfo(username: String, shipInfoId: String)
     fun pushShipInfo(username: String, shipInfo: ShipInfo)
-    fun getShipInfo(username: String, shipInfoId: String):MutableLiveData<ShipInfo>
+    fun getShipInfo(username: String): MutableLiveData<List<ShipInfo>>
 
 }

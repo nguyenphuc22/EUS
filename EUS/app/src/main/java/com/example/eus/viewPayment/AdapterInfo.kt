@@ -1,19 +1,23 @@
 package com.example.eus.viewPayment
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Product
 import com.example.eus.ODT.ShipInfo
+import com.example.eus.R
 import com.example.eus.databinding.ItemChangeInfoBinding
 
-class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
+class AdapterInfo(var onClickItem: OnClickItem) : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
 
     private var shipInfo = ArrayList<ShipInfo>()
     private lateinit var arrayBoolean: BooleanArray
-    inner class InfoViewHolder(var binding: ItemChangeInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class InfoViewHolder(var binding: ItemChangeInfoBinding) : RecyclerView.ViewHolder(binding.root),
+        PopupMenu.OnMenuItemClickListener {
 
         fun bind(shipInfo : ShipInfo) {
             binding.txtTitle.text = Util.formatTitleInfo(shipInfo.name, shipInfo.phone)
@@ -21,12 +25,37 @@ class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
 
             binding.radio.isChecked = arrayBoolean.get(adapterPosition)
 
+            binding.imageView4.setOnClickListener {
+                var popupMenu = PopupMenu(binding.imageView4.context,binding.imageView4)
+                popupMenu.inflate(R.menu.menu_crud)
+                popupMenu.setOnMenuItemClickListener(this)
+                popupMenu.show()
+            }
+
             binding.radio.setOnClickListener {
                 resetStateButtonRadio()
                 arrayBoolean.set(adapterPosition,!arrayBoolean.get(adapterPosition))
                 binding.radio.isChecked = arrayBoolean.get(adapterPosition)
                 notifyDataSetChanged()
             }
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun onMenuItemClick(item: MenuItem?): Boolean {
+            when(item?.itemId) {
+                R.id.item_delete -> {
+                    onClickItem.OnClickMenuDelete(shipInfo.get(adapterPosition))
+                    shipInfo.removeAt(adapterPosition)
+                    notifyDataSetChanged()
+                    return true
+                }
+                R.id.item_update -> {
+                    onClickItem.OnCLickMenuUpdate(shipInfo.get(adapterPosition))
+
+                    return true
+                }
+            }
+            return false
         }
 
     }
@@ -44,11 +73,11 @@ class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
         return shipInfo.size
     }
 
-    fun setAccounts(shipInfos : ArrayList<ShipInfo>) {
+    fun setShipInfos(shipInfos : ArrayList<ShipInfo>) {
         this.shipInfo = shipInfos
         arrayBoolean = BooleanArray(shipInfo.size)
         if (arrayBoolean.size > 0) {
-            arrayBoolean[0] == true
+            arrayBoolean[0] = true
         }
         notifyDataSetChanged()
     }

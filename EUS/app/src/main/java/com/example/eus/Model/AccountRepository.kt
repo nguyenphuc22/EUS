@@ -142,7 +142,7 @@ class AccountRepository : Repository {
         return firebaseRealTime.pushShipInfo(username, shipInfo)
     }
 
-    override fun getShipInfo(username: String, shipInfoId: String): MutableLiveData<ShipInfo> {
-        return firebaseRealTime.getShipInfo(username, shipInfoId)
+    override fun getShipInfo(username: String): MutableLiveData<List<ShipInfo>> {
+        return firebaseRealTime.getShipInfo(username)
     }
 }

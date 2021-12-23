@@ -21,6 +21,6 @@ interface FireApiDatabase {
     fun deleteProductInCart(username: String, productId: String)
     fun pushShipInfo(username: String, shipInfo: ShipInfo)
     fun updateShipInfo(username: String, shipInfo: ShipInfo)
-    fun getShipInfo(username: String, idShipInfo: String): MutableLiveData<ShipInfo>
+    fun getShipInfo(username: String): MutableLiveData<List<ShipInfo>>
     fun removeShipInfo(username: String, idShipInfo: String)
 }

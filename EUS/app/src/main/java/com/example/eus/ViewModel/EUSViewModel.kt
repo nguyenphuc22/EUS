@@ -109,8 +109,8 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
         return repository.updateShipInfo(username, shipInfo)
     }
 
-    fun getShipInfo(username: String, shipInfoId: String): MutableLiveData<ShipInfo>{
-        return repository.getShipInfo(username, shipInfoId)
+    fun getShipInfoAll(username: String): MutableLiveData<List<ShipInfo>>{
+        return repository.getShipInfo(username)
     }
 
     fun pushShipInfo(username: String, shipInfo: ShipInfo){

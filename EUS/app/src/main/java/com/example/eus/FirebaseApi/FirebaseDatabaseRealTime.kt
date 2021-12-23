@@ -141,30 +141,23 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database.addChildEventListener(object :ChildEventListener{
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                var tmp=snapshot.getValue<Account>()
-                if(username== tmp?.mUsername){
-                    accountTmp.postValue(tmp)
+                val account = snapshot.getValue(Account::class.java)
+                if(username== account?.mUsername){
+                    accountTmp.postValue(account)
                     Log.i("TEST2", accountTmp.toString())
                 }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                var a=snapshot.getValue<Account>()
-                Log.i("TEST1111",a.toString())
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                var a=snapshot.getValue<Account>()
-                Log.i("TEST2222",a.toString())
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                var a=snapshot.getValue<Account>()
-                Log.i("TEST3333",a.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.i("MainActivity:GetAccout",error.message)
             }
 
         })
@@ -357,27 +350,31 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database.child(username).child("mshipInfos").child(shipInfo.id.toString()).updateChildren(shipInfo.toMap())
     }
 
-    override fun getShipInfo(username: String, idShipInfo: String): MutableLiveData<ShipInfo> {
-        var mutableLiveData: MutableLiveData<ShipInfo> = MutableLiveData()
+    override fun getShipInfo(username: String): MutableLiveData<List<ShipInfo>> {
+        var mutableLiveData: MutableLiveData<List<ShipInfo>> = MutableLiveData()
+        var shipInfos = ArrayList<ShipInfo>()
         database= Firebase.database.getReference("Accounts").child(username).child("mshipInfos")
-        database.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(shipSnapshot in snapshot.children){
-                        var ship = shipSnapshot.getValue(ShipInfo::class.java)
-                        if(ship?.id==idShipInfo){
-                            mutableLiveData.postValue(ship)
-                            break
-                        }
-                    }
-                }
+        database.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val shipInfo = snapshot.getValue(ShipInfo::class.java)
+                shipInfos.add(shipInfo!!)
+                mutableLiveData.postValue(shipInfos)
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })
+
         return mutableLiveData
     }
 
