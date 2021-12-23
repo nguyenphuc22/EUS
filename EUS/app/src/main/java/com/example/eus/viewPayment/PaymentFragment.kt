@@ -115,7 +115,19 @@ class PaymentFragment : Fragment() , OnClickCart {
 
     override fun onClickMinus(product: Product) {
         product.mQuantity = product.mQuantity?.minus(1)
-        viewModel.addCart(product,sharedPref.getAccount(activity).toString())
+        if(product.mQuantity!! > 0) {
+            viewModel.addCart(product,sharedPref.getAccount(activity).toString())
+        } else {
+            viewModel.deleteProductInCart(
+                productId = product.mID.toString(),
+                username = sharedPref.getAccount(activity).toString())
+        }
+    }
+
+    override fun onDelete(product: Product) {
+        viewModel.deleteProductInCart(
+            productId = product.mID.toString(),
+            username = sharedPref.getAccount(activity).toString())
     }
 
 }
