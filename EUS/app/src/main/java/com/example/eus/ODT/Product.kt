@@ -13,7 +13,8 @@ data class Product(
     var mDescription : String? = null,
     var mQuantity : Int? = null,
     var mName : String? = null,
-    var mDetails : List<String>? = null
+    var mDetails : List<String>? = null,
+    var mStock : Int? = null,
     ) : Parcelable
 {
     constructor(parcel: Parcel) : this(
@@ -38,7 +39,8 @@ data class Product(
         private var mDescription : String? = null,
         private var mQuantity : Int? = null,
         private var mName : String? = null,
-        private var mDetails : List<String>? = null
+        private var mDetails : List<String>? = null,
+        var mStock : Int? = null
     ) {
         fun addID( id : String) : Builder {
             this.mID = id
@@ -76,8 +78,12 @@ data class Product(
             this.mDetails = details
             return  this
         }
+        fun addStock( stock : Int) : Builder {
+            this.mStock = stock
+            return  this
+        }
         fun build() : Product {
-            return Product(mID,mImage,mPrice,mTitle,mType,mDescription,mQuantity,mName,mDetails)
+            return Product(mID,mImage,mPrice,mTitle,mType,mDescription,mQuantity,mName,mDetails,mStock)
         }
     }
 
