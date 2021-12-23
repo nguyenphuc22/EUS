@@ -124,4 +124,10 @@ class PaymentFragment : Fragment() , OnClickCart {
         }
     }
 
+    override fun onDelete(product: Product) {
+        viewModel.deleteProductInCart(
+            productId = product.mID.toString(),
+            username = sharedPref.getAccount(activity).toString())
+    }
+
 }

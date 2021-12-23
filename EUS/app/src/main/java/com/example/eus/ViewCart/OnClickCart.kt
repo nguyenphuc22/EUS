@@ -6,4 +6,5 @@ interface OnClickCart {
     fun onClickPlus(product: Product)
     fun onUpdatePrice(price: Double)
     fun onClickMinus(product: Product)
+    fun onDelete(product: Product)
 }
