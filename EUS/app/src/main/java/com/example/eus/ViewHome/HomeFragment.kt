@@ -52,8 +52,8 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         if(auth.currentUser!=null){
             sharedPref.setAccount(activity,auth.currentUser?.email.toString().replace(".",""))
             var account = Account.Builder()
-                .addUsername(auth.currentUser?.email.toString())
-                .addPassword(auth.currentUser?.email.toString().replace("@gmail.com",""))
+                .addUsername(auth.currentUser?.email.toString().replace(".",""))
+                .addEmail(auth.currentUser?.email.toString())
                 .build()
             viewModel.isExist(account).observe(viewLifecycleOwner, {
                 Log.i("test123",it.toString())
