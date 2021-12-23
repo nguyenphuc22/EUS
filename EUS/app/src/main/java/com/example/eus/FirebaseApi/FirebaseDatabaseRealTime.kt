@@ -201,20 +201,39 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         var mutableLiveData : MutableLiveData<List<Product>> = MutableLiveData()
         var list= ArrayList<Product>()
         database= Firebase.database.getReference("Products")
-        database.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(productSnapshot in snapshot.children){
-                        val product= productSnapshot.getValue(Product::class.java)
-                        list.add(product!!)
-                    }
-                }
-                Log.i("Firebase",list.size.toString())
+        database.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val product = snapshot.getValue(Product::class.java)
+                Log.i("Child","Added")
+                Log.i("Child_Added",snapshot.key.toString())
+                Log.i("Child_Added",snapshot.value.toString())
+                Log.i("Child_Added",product.toString())
+                product?.let { list.add(it) }
                 mutableLiveData.postValue(list)
             }
 
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val product = snapshot.getValue(Product::class.java)
+                Log.i("Child","Changed")
+                Log.i("Child_Changed",snapshot.value.toString())
+                for (i in 0..list.size - 1) {
+                    if (list.get(i).mID == product?.mID) {
+                        list.removeAt(i)
+                        list.add(product!!)
+                    }
+                }
+                mutableLiveData.postValue(list)
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                Log.i("Child","Removed")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.i("Child","Move")
+            }
+
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })
@@ -288,23 +307,27 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         var mutableLiveData: MutableLiveData<Cart> = MutableLiveData()
         var list= ArrayList<Product>()
         database= FirebaseDatabase.getInstance().getReference("Cart").child(username)
-        database.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(productSnapshot in snapshot.children){
-                        val product= productSnapshot.getValue(Product::class.java)
-                        list.add(product!!)
-                    }
-                    var cart = Cart(list)
-                    mutableLiveData.postValue(cart)
-                }
+        database.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val product = snapshot.getValue(Product::class.java)
+                list.add(product!!)
+                mutableLiveData.postValue(Cart(list))
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })
+
         return mutableLiveData
 
     }

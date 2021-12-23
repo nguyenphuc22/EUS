@@ -41,6 +41,16 @@ data class Cart(
         return this.products
     }
 
+    fun removeItemASame() {
+        for (product in this.products) {
+            for (i in 0..this.products.size - 1) {
+                if (product.mID!! == products[i].mID!!) {
+                    products.removeAt(i)
+                }
+            }
+        }
+    }
+
     fun reset() {
         this.products = arrayListOf<Product>()
     }
