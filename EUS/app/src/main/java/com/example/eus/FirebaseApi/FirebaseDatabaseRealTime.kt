@@ -79,7 +79,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         var ispush: MutableLiveData<Boolean>
         ispush= MutableLiveData()
         Log.i("TEST2", account.toString())
-        database.child("Accounts").push().setValue(account,
+        database.child("Accounts").child(account.mUsername.toString()).setValue(account,
             object: DatabaseReference.CompletionListener{
                 override fun onComplete(error: DatabaseError?, ref: DatabaseReference) {
                     if (error != null) {
@@ -280,7 +280,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     override fun addCart(product: Product, username: String) {
         database= FirebaseDatabase.getInstance().getReference("Cart")
         var id= database.push().key
-        database.child(username).child(id.toString()).setValue(product)
+        database.child(username).child(product.mID.toString()).setValue(product)
     }
 
     override fun getCart(username: String): MutableLiveData<Cart> {
