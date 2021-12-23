@@ -316,6 +316,8 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     }
 
     override fun deleteProductInCart(username: String, productId: String) {
-        TODO("Not yet implemented")
+        database=Firebase.database.getReference("Cart").child(username).child(productId)
+        database.removeValue()
+
     }
 }

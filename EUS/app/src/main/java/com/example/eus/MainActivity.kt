@@ -62,13 +62,13 @@ class MainActivity : AppCompatActivity() {
             .addImage("url")
             .addPhone("phone")
             .addName("ngphuc")
-            .addUsername("8416456")
+            .addUsername("8416")
             .addPassword("123")
             .addAddress("mdf")
             .addShipInfos(b)
             .build()
 
-        var a=firebaseDatabase.pushAccount(account)
+        var a=firebaseDatabase.deleteProductInCart("8416456","bbb")
 
 
         setupActionBarWithNavController(navController)
