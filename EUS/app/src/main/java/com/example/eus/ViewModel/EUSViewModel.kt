@@ -99,4 +99,8 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
     fun getCache() : LiveData<List<com.example.eus.Cache.Product>> {
         return productCacheMutableLiveData
     }
+
+    fun deleteProductInCart(username: String, productId: String){
+        return repository.deleteProductInCart(username, productId)
+    }
 }

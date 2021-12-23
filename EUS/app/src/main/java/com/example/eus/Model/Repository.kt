@@ -25,4 +25,5 @@ interface Repository {
     fun search(nameProduct: String): MutableLiveData<List<Product>>
     suspend fun saveCacheProducts(products : List<Product>)
     suspend fun getCacheProducts() : LiveData<List<com.example.eus.Cache.Product>>
+    fun deleteProductInCart(username: String, productId: String)
 }

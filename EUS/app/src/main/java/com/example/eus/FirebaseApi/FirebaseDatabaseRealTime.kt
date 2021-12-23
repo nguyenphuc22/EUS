@@ -314,4 +314,8 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database= Firebase.database.getReference("Accounts")
         database.child(username).updateChildren(account.toMap())
     }
+
+    override fun deleteProductInCart(username: String, productId: String) {
+        TODO("Not yet implemented")
+    }
 }

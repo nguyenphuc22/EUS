@@ -17,4 +17,5 @@ interface FireApiDatabase {
     fun search(name: String): MutableLiveData<List<Product>>
     fun addCart(product: Product, username: String)
     fun getCart(username: String): MutableLiveData<Cart>
+    fun deleteProductInCart(username: String, productId: String)
 }

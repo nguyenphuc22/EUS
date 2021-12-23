@@ -124,4 +124,8 @@ class AccountRepository : Repository {
     override suspend fun getCacheProducts(): LiveData<List<com.example.eus.Cache.Product>> {
         return productDAO.getAll()
     }
+
+    override fun deleteProductInCart(username: String, productId: String) {
+        return firebaseRealTime.deleteProductInCart(username, productId)
+    }
 }
