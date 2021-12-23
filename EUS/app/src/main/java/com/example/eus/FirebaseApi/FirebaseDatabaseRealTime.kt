@@ -312,25 +312,6 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         Log.i("FirebaseDatabase",username.toString())
         Log.i("FirebaseDatabase",account.toString())
         database= Firebase.database.getReference("Accounts")
-        database.child("-MrRNKUT1olZAfS6nl9e").updateChildren(account.toMap())
-//        database.addValueEventListener(object : ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if(snapshot.exists()){
-//                    for(accSnapshot in snapshot.children){
-//                        val acc = accSnapshot.getValue(Account::class.java)
-//                        if(acc?.mUsername == username){
-//                            Log.i("TestSetUsername", accSnapshot.key.toString())
-//                            database.child(accSnapshot.key.toString()).setValue(account)
-//                            break
-//                        }
-//                    }
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
+        database.child(username).updateChildren(account.toMap())
     }
 }

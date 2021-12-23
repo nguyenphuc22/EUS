@@ -11,7 +11,7 @@ import com.example.eus.databinding.ItemChangeInfoBinding
 
 class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
 
-    private lateinit var shipInfo : ArrayList<ShipInfo>
+    private var shipInfo = ArrayList<ShipInfo>()
     private lateinit var arrayBoolean: BooleanArray
     inner class InfoViewHolder(var binding: ItemChangeInfoBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -47,6 +47,9 @@ class AdapterInfo : RecyclerView.Adapter<AdapterInfo.InfoViewHolder>() {
     fun setAccounts(shipInfos : ArrayList<ShipInfo>) {
         this.shipInfo = shipInfos
         arrayBoolean = BooleanArray(shipInfo.size)
+        if (arrayBoolean.size > 0) {
+            arrayBoolean[0] == true
+        }
         notifyDataSetChanged()
     }
 

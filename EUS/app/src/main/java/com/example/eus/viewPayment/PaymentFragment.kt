@@ -106,6 +106,7 @@ class PaymentFragment : Fragment() , OnClickCart {
 
     override fun onClickPlus(product: Product) {
         product.mQuantity = product.mQuantity?.plus(1)
+        viewModel.addCart(product,sharedPref.getAccount(activity).toString())
     }
 
     override fun onUpdatePrice(price: Double) {
@@ -114,6 +115,7 @@ class PaymentFragment : Fragment() , OnClickCart {
 
     override fun onClickMinus(product: Product) {
         product.mQuantity = product.mQuantity?.minus(1)
+        viewModel.addCart(product,sharedPref.getAccount(activity).toString())
     }
 
 }

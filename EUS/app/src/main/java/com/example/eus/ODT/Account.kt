@@ -13,13 +13,18 @@ data class Account (
     var mShipInfos : ArrayList<ShipInfo>? = null
     )
 {
-    fun toMap(): Map<String, String?> {
+    fun toMap(): Map<String, Any?> {
         return mapOf(
+            "maddress" to mAddress,
+            "mdateOfBirth" to mDateOfBirth,
             "memail" to mEmail,
             "mname" to mName,
             "mpassword" to mPassword,
             "mphone" to mPhone,
             "musername" to mUsername,
+            "mid" to mId,
+            "mimage" to mImage,
+            "mshipInfos" to mShipInfos
         )
     }
 

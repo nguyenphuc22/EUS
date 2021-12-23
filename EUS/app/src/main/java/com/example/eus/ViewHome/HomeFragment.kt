@@ -92,7 +92,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
 
-        viewModel.setUser(sharedPref.getAccount(activity).toString(), Util.fakeAccount())
+//        viewModel.setUser(sharedPref.getAccount(activity).toString(), Util.fakeAccount())
     }
 
 
@@ -185,7 +185,6 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
     }
 
     override fun onCLickProduct(product: Product) {
-        val productFake = Util.fakeProduct()
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(product)
         findNavController().navigate(action)
     }

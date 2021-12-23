@@ -32,6 +32,7 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var sharedPref :ManagerSharePref
     private lateinit var viewModel : EUSViewModel
+    private lateinit var account: com.example.eus.ODT.Account
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,6 +63,7 @@ class ProfileFragment : Fragment() {
         sharedPref = ManagerSharePref()
         viewModel.getAccount(sharedPref.getAccount(activity).toString())?.observe(viewLifecycleOwner,
             Observer {
+                account = it
                 if (it.mName != null) {
                     binding.editName.text = Editable.Factory.getInstance().newEditable(it.mName)
                 }
@@ -80,13 +82,11 @@ class ProfileFragment : Fragment() {
 
         binding.btnSave.setOnClickListener {
             Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
-            val account = com.example.eus.ODT.Account.Builder()
-                .addName(binding.editName.text.toString())
-                .addEmail(binding.editMail.text.toString())
-                .addPhone(binding.txtPhoneInfor.text.toString())
-                .addUsername(sharedPref.getAccount(activity).toString())
-                .addPassword(binding.editPassword.text.toString())
-                .build()
+
+            account.mName = binding.editName.text.toString()
+            account.mEmail = binding.editMail.text.toString()
+            account.mPhone = binding.txtPhoneInfor.text.toString()
+            account.mPassword = binding.editPassword.text.toString()
 
             viewModel.setUser(sharedPref.getAccount(activity).toString(),account = account)
         }

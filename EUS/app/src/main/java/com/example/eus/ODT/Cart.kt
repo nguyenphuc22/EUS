@@ -40,4 +40,8 @@ data class Cart(
     fun getProducts(): ArrayList<Product> {
         return this.products
     }
+
+    fun reset() {
+        this.products = arrayListOf<Product>()
+    }
 }

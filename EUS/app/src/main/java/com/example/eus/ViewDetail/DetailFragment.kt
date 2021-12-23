@@ -64,6 +64,7 @@ class DetailFragment : Fragment() {
         binding.include.recyclerDetail.layoutManager = LinearLayoutManager(context)
         binding.txtAddCart.setOnClickListener{
             txtTv.visibility=View.VISIBLE
+            args.productDetail!!.mQuantity = args.productDetail!!.mQuantity?.plus(1)
             viewModel.addCart(args.productDetail!!,sharedPref.getAccount(activity)!!)
             viewModel.getCart(sharedPref.getAccount(activity)!!).observe(viewLifecycleOwner, Observer {
                 if(it.getSize()!=0){
