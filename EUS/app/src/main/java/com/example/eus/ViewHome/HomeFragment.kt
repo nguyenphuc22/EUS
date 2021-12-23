@@ -53,11 +53,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
             sharedPref.setAccount(activity,auth.currentUser?.email.toString().replace(".",""))
             var account = Account.Builder()
                 .addUsername(auth.currentUser?.email.toString())
-                .addName(auth.currentUser?.displayName.toString())
-                .addEmail(auth.currentUser?.email.toString())
-                .addDateOfBirth(0)
-                .addId("")
-                .addPhone("")
+                .addPassword(auth.currentUser?.email.toString().replace("@gmail.com",""))
                 .build()
             viewModel.isExist(account).observe(viewLifecycleOwner, {
                 Log.i("test123",it.toString())

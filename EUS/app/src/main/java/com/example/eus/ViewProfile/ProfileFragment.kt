@@ -89,6 +89,10 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
+            auth.signOut()
+            GoogleSignIn.getClient(this.activity, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+                .signOut()
+            sharedPref.logout(activity)
             findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
         }
     }

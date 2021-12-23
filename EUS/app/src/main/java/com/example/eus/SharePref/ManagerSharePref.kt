@@ -73,6 +73,9 @@ class ManagerSharePref : SharedPref {
     }
 
     override fun logout(activity: Activity?) {
-        TODO("Not yet implemented")
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        sharedPref?.edit()?.clear()?.apply()
+
+
     }
 }

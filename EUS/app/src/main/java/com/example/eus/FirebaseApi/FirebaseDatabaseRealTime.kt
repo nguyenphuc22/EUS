@@ -78,6 +78,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database=Firebase.database.getReference()
         var ispush: MutableLiveData<Boolean>
         ispush= MutableLiveData()
+        Log.i("TEST2", account.toString())
         database.child("Accounts").push().setValue(account,
             object: DatabaseReference.CompletionListener{
                 override fun onComplete(error: DatabaseError?, ref: DatabaseReference) {
@@ -92,22 +93,23 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     override fun isExist(account: Account):MutableLiveData<Boolean>{
         var isAccount : MutableLiveData<Boolean>
         isAccount = MutableLiveData()
-
+        var isTrue : Boolean = true
         database=Firebase.database.getReference("Accounts")
         database.addChildEventListener(object :ChildEventListener{
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                var tmp=snapshot.getValue<Account>()
-                if(account.mUsername== tmp?.mUsername){
+                var tmp = snapshot.getValue<Account>()
+                if (isTrue) {
+                    if (account.mUsername == tmp?.mUsername) {
                         isAccount.postValue(true)
+                        isTrue = false
+
+                    } else {
+                        isAccount.postValue(false)
+                    }
 
                 }
-                else {
-                        isAccount.postValue(false)
-                     }
-
             }
-
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 var a=snapshot.getValue<Account>()
                 Log.i("TEST1111",a.toString())
