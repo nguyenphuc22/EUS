@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eus.R
+import com.example.eus.SharePref.ManagerSharePref
+import com.example.eus.SharePref.SharedPref
 import com.example.eus.ViewHome.Util
 import com.example.eus.databinding.FragmentChangInfoBinding
 
@@ -17,6 +19,7 @@ class ChangeInfoFragment : Fragment() {
 
     private lateinit var binding : FragmentChangInfoBinding
     private lateinit var adapter : AdapterInfo
+    private lateinit var sharedPref: SharedPref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +40,8 @@ class ChangeInfoFragment : Fragment() {
         binding.recyclerInfo.layoutManager = LinearLayoutManager(context)
 
         binding.btn.setOnClickListener {
+            sharedPref = ManagerSharePref()
+            adapter.getInfo()?.let { it1 -> sharedPref.setShipInfo(activity,shipInfo = it1) }
             this.findNavController().navigate(R.id.action_changInfoFragment_to_paymentFragment)
         }
     }

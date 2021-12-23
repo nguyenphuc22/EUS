@@ -15,6 +15,8 @@ import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Order
 import com.example.eus.ODT.Product
 import com.example.eus.R
+import com.example.eus.SharePref.ManagerSharePref
+import com.example.eus.SharePref.SharedPref
 import com.example.eus.ViewCart.AdapterCart
 import com.example.eus.ViewCart.OnClickCart
 import com.example.eus.ViewModel.EUSViewModel
@@ -29,6 +31,7 @@ class PaymentFragment : Fragment() , OnClickCart {
     private lateinit var adapter : AdapterCart
     private lateinit var order: Order
     private lateinit var viewModel : EUSViewModel
+    private lateinit var sharedPref: SharedPref
     private val args: PaymentFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,8 +70,8 @@ class PaymentFragment : Fragment() , OnClickCart {
 
             })
         }
-        // get share pref
-        val shipInfo = null
+        sharedPref = ManagerSharePref()
+        val shipInfo = sharedPref.getShipInfo(activity)
         order = Order.Builder()
             .addCart(Cart(products))
             .addPayment(COD())
