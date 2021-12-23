@@ -138,16 +138,37 @@
             app:destination="@id/changePaymentFragment" />
         <argument
             android:name="ListProduct"
-            app:argType="com.example.eus.ODT.Product[]" />
+            app:argType="com.example.eus.ODT.Product[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/changInfoFragment"
         android:name="com.example.eus.viewPayment.ChangeInfoFragment"
         android:label="Thông Tin"
-        tools:layout="@layout/fragment_chang_info" />
+        tools:layout="@layout/fragment_chang_info" >
+        <action
+            android:id="@+id/action_changInfoFragment_to_addInfoFragment"
+            app:destination="@id/addInfoFragment" />
+        <argument
+            android:name="shipInfo"
+            app:argType="com.example.eus.ODT.ShipInfo" />
+        <action
+            android:id="@+id/action_changInfoFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePaymentFragment"
         android:name="com.example.eus.viewPayment.ChangePaymentFragment"
         android:label="Phương Thức Thanh Toán"
         tools:layout="@layout/fragment_change_payment" />
+    <fragment
+        android:id="@+id/addInfoFragment"
+        android:name="com.example.eus.viewPayment.AddInfoFragment"
+        android:label="Thêm Địa Chỉ"
+        tools:layout="@layout/fragment_add_info">
+        <action
+            android:id="@+id/action_addInfoFragment_to_changInfoFragment"
+            app:destination="@id/changInfoFragment" />
+    </fragment>
 </navigation>

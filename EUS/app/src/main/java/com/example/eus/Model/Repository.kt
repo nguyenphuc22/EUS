@@ -1,5 +1,6 @@
 package com.example.eus.Model
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
@@ -22,5 +23,6 @@ interface Repository {
     fun addCart(product: Product, username: String)
     fun getCart(username: String): MutableLiveData<Cart>
     fun search(nameProduct: String): MutableLiveData<List<Product>>
-
+    suspend fun saveCacheProducts(products : List<Product>)
+    suspend fun getCacheProducts() : LiveData<List<com.example.eus.Cache.Product>>
 }

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.example.eus.ODT.Payment
 import com.example.eus.R
+import com.example.eus.ViewDetail.DetailFragmentArgs
 import com.example.eus.ViewHome.Util
 import com.example.eus.databinding.FragmentChangePaymentBinding
 

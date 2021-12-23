@@ -2,6 +2,7 @@ package com.example.eus.ViewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.eus.Model.AccountRepository
@@ -17,10 +18,12 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository : AccountRepository
     private var accountMutableLiveData : MutableLiveData<Account>
+    private var productCacheMutableLiveData : LiveData<List<com.example.eus.Cache.Product>>
 
     init {
-        repository = AccountRepository()
+        repository = AccountRepository(application)
         accountMutableLiveData = repository.getAccountMutableLiveData()
+        productCacheMutableLiveData = repository.productsCache
     }
 
     fun getAccount(username: String):MutableLiveData<Account>?{
@@ -85,5 +88,15 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
 
     fun search(nameProduct: String): MutableLiveData<List<Product>>{
         return repository.search(nameProduct)
+    }
+
+    fun saveCache(products : List<Product>) {
+        viewModelScope.launch ( Dispatchers.IO ) {
+            repository.saveCacheProducts(products)
+        }
+    }
+
+    fun getCache() : LiveData<List<com.example.eus.Cache.Product>> {
+        return productCacheMutableLiveData
     }
 }

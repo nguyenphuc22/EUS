@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/layout/form_select.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/form_total_price.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/formtwoeditandbutton.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/fragment_add_info.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/fragment_chang_info.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.2515625" />
@@ -61,6 +62,7 @@
         <entry key="app/src/main/res/layout/item_product.xml" value="0.25" />
         <entry key="app/src/main/res/layout/itemlogin.xml" value="0.25" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.21296296296296297" />
+        <entry key="app/src/main/res/menu/menu_add.xml" value="0.2515625" />
       </map>
     </option>
   </component>

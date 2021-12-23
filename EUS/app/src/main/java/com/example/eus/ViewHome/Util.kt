@@ -147,11 +147,8 @@ class Util {
                 .build())
             val cart = Cart(list)
             val order = Order.Builder()
-                .addAddress("1 Nguyen Van Cu, phuong 1, quan 5,  Ho Chi Minh")
                 .addCart(cart)
                 .addPayment(COD())
-                .addName("Thanh Bu Liem")
-                .addPhone("089xxxxx")
                 .build()
            val mutableLiveData : MutableLiveData<Order> = MutableLiveData()
             mutableLiveData.postValue(order)
@@ -198,6 +195,19 @@ class Util {
 //            accounts.add(account)
 //            return MutableLiveData(accounts)
             return account
+        }
+
+        fun fakeShipInfos() : MutableLiveData<ArrayList<ShipInfo>> {
+            val shipInfo = ShipInfo.Builder()
+                .addAddress("Hoa Thanh Ti")
+                .addName("Nick Seven")
+                .addPhone("089xxxx")
+                .build()
+            var shipInfos = ArrayList<ShipInfo>()
+            for (i in 0..5) {
+                shipInfos.add(shipInfo)
+            }
+            return MutableLiveData(shipInfos)
         }
     }
 }

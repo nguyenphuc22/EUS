@@ -76,4 +76,11 @@ class AdapterCart(var onClickCart: OnClickCart) : RecyclerView.Adapter<AdapterCa
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun addProduct(product: Product) {
+        mCart.add(product)
+        onClickCart.onUpdatePrice(mCart.calc())
+        notifyDataSetChanged()
+    }
+
 }

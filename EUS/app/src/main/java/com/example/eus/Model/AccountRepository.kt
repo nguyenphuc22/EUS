@@ -1,27 +1,36 @@
 package com.example.eus.Model
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.eus.Cache.CacheDatabase
+import com.example.eus.Cache.ProductDAO
 import com.example.eus.FirebaseApi.FireApiDatabase
 import com.example.eus.FirebaseApi.FirebaseDatabaseRealTime
 import com.example.eus.FirebaseApi.Firestore
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
-import com.example.eus.ViewHome.Util
 
 class AccountRepository : Repository {
 
     var accounts : MutableLiveData<Account>
+    var productsCache : LiveData<List<com.example.eus.Cache.Product>>
 
     var firestore : Firestore
 
     var firebaseRealTime: FireApiDatabase
 
+    private var productDAO: ProductDAO
+
+    constructor(application: Application) {
+        productDAO = CacheDatabase.getInstance(application).productDao()
+        productsCache = productDAO.getAll()
+    }
+
     init {
         firestore = Firestore()
-        
         accounts = MutableLiveData()
         firebaseRealTime= FirebaseDatabaseRealTime()
     }
@@ -93,5 +102,26 @@ class AccountRepository : Repository {
 
     override fun search(nameProduct: String): MutableLiveData<List<Product>> {
         return firebaseRealTime.search(nameProduct)
+    }
+
+    override suspend fun saveCacheProducts(products: List<Product>) {
+        productDAO.deleteAll()
+        for (product in products) {
+            val productCache = com.example.eus.Cache.Product.Builder()
+                .addID(product.mID!!)
+                .addImage(product.mImage!!)
+                .addTitle(product.mTitle!!)
+                .addPrice(product.mPrice!!)
+                .addQuantity(product.mQuantity!!)
+                .addName(product.mName!!)
+                .addType(product.mType!!)
+                .build()
+            productDAO.insert(product = productCache)
+            Log.i("Insert",productCache.toString())
+        }
+    }
+
+    override suspend fun getCacheProducts(): LiveData<List<com.example.eus.Cache.Product>> {
+        return productDAO.getAll()
     }
 }

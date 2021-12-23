@@ -45,7 +45,10 @@ class AdapterProduct : RecyclerView.Adapter<AdapterProduct.ProductViewHolder>() 
         this.products = list as ArrayList<Product>
         notifyDataSetChanged()
     }
-
+    fun addProduct(product: Product) {
+        this.products.add(product)
+        notifyDataSetChanged()
+    }
     fun addOnClickItem(onClickItemProduct: OnClickItemProduct) {
         this.onClickItemProduct = onClickItemProduct
     }
