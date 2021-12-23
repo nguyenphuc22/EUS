@@ -88,6 +88,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         binding.recyclerListProduct.adapter = adapterProduct
 
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
+        
     }
 
 

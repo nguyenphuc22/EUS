@@ -12,6 +12,7 @@ import com.example.eus.FirebaseApi.Firestore
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
+import com.example.eus.ODT.ShipInfo
 
 class AccountRepository : Repository {
 
@@ -127,5 +128,21 @@ class AccountRepository : Repository {
 
     override fun deleteProductInCart(username: String, productId: String) {
         return firebaseRealTime.deleteProductInCart(username, productId)
+    }
+
+    override fun updateShipInfo(username: String, shipInfo: ShipInfo) {
+        return firebaseRealTime.updateShipInfo(username, shipInfo)
+    }
+
+    override fun deleteShipInfo(username: String, shipInfoId: String) {
+        return firebaseRealTime.removeShipInfo(username, shipInfoId)
+    }
+
+    override fun pushShipInfo(username: String, shipInfo: ShipInfo) {
+        return firebaseRealTime.pushShipInfo(username, shipInfo)
+    }
+
+    override fun getShipInfo(username: String, shipInfoId: String): MutableLiveData<ShipInfo> {
+        return firebaseRealTime.getShipInfo(username, shipInfoId)
     }
 }

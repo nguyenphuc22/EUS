@@ -9,6 +9,7 @@ import com.example.eus.Model.AccountRepository
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
+import com.example.eus.ODT.ShipInfo
 import com.example.eus.ViewHome.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -102,5 +103,21 @@ class EUSViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteProductInCart(username: String, productId: String){
         return repository.deleteProductInCart(username, productId)
+    }
+
+    fun updateShipInfo(username: String, shipInfo: ShipInfo){
+        return repository.updateShipInfo(username, shipInfo)
+    }
+
+    fun getShipInfo(username: String, shipInfoId: String): MutableLiveData<ShipInfo>{
+        return repository.getShipInfo(username, shipInfoId)
+    }
+
+    fun pushShipInfo(username: String, shipInfo: ShipInfo){
+        return repository.pushShipInfo(username, shipInfo)
+    }
+
+    fun deleteShipInfo(username: String, shipInfoId: String){
+        return repository.deleteShipInfo(username, shipInfoId)
     }
 }

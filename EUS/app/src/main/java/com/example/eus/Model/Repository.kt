@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
+import com.example.eus.ODT.ShipInfo
 
 interface Repository {
     fun getAccount(username: String): MutableLiveData<Account>
@@ -26,4 +27,9 @@ interface Repository {
     suspend fun saveCacheProducts(products : List<Product>)
     suspend fun getCacheProducts() : LiveData<List<com.example.eus.Cache.Product>>
     fun deleteProductInCart(username: String, productId: String)
+    fun updateShipInfo(username: String, shipInfo: ShipInfo)
+    fun deleteShipInfo(username: String, shipInfoId: String)
+    fun pushShipInfo(username: String, shipInfo: ShipInfo)
+    fun getShipInfo(username: String, shipInfoId: String):MutableLiveData<ShipInfo>
+
 }

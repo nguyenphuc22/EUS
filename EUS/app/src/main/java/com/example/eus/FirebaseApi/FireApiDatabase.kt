@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
+import com.example.eus.ODT.ShipInfo
 
 interface FireApiDatabase {
     fun getAccout1(account: Account): MutableLiveData<Account>
@@ -18,4 +19,8 @@ interface FireApiDatabase {
     fun addCart(product: Product, username: String)
     fun getCart(username: String): MutableLiveData<Cart>
     fun deleteProductInCart(username: String, productId: String)
+    fun pushShipInfo(username: String, shipInfo: ShipInfo)
+    fun updateShipInfo(username: String, shipInfo: ShipInfo)
+    fun getShipInfo(username: String, idShipInfo: String): MutableLiveData<ShipInfo>
+    fun removeShipInfo(username: String, idShipInfo: String)
 }
