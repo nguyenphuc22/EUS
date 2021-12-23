@@ -309,25 +309,28 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
     }
 
     override fun setUser(username: String, account: Account) {
+        Log.i("FirebaseDatabase",username.toString())
+        Log.i("FirebaseDatabase",account.toString())
         database= Firebase.database.getReference("Accounts")
-        database.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(accSnapshot in snapshot.children){
-                        val acc = accSnapshot.getValue(Account::class.java)
-                        if(acc?.mUsername == username){
-                            Log.i("TestSetUsername", accSnapshot.key.toString())
-                            database.child(accSnapshot.key.toString()).setValue(account)
-                            break
-                        }
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
+        database.child("-MrRNKUT1olZAfS6nl9e").updateChildren(account.toMap())
+//        database.addValueEventListener(object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if(snapshot.exists()){
+//                    for(accSnapshot in snapshot.children){
+//                        val acc = accSnapshot.getValue(Account::class.java)
+//                        if(acc?.mUsername == username){
+//                            Log.i("TestSetUsername", accSnapshot.key.toString())
+//                            database.child(accSnapshot.key.toString()).setValue(account)
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
     }
 }

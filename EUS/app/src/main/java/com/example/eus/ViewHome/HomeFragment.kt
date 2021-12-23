@@ -92,7 +92,7 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
 
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
 
-//        viewModel.setUser("abc", Util.fakeAccounts())
+        viewModel.setUser(sharedPref.getAccount(activity).toString(), Util.fakeAccount())
     }
 
 

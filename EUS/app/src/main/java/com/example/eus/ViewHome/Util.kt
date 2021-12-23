@@ -184,7 +184,7 @@ class Util {
 //            var accounts = ArrayList<Account>()
             var account = Account.Builder()
                 .addName("Seven")
-                .addAddress("20 Nguyen Trai")
+                .addAddress("20 jhgj Nguyen Trai")
                 .addPhone("089xxxxxx")
                 .addUsername("456")
                 .addPassword("456")

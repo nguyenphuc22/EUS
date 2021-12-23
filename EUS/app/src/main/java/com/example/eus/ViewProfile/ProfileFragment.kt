@@ -76,6 +76,8 @@ class ProfileFragment : Fragment() {
                 }
             })
 
+
+
         binding.btnSave.setOnClickListener {
             Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
             val account = com.example.eus.ODT.Account.Builder()
@@ -85,6 +87,7 @@ class ProfileFragment : Fragment() {
                 .addUsername(sharedPref.getAccount(activity).toString())
                 .addPassword(binding.editPassword.text.toString())
                 .build()
+
             viewModel.setUser(sharedPref.getAccount(activity).toString(),account = account)
         }
 

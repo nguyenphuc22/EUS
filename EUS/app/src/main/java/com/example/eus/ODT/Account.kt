@@ -13,7 +13,17 @@ data class Account (
     var mShipInfos : ArrayList<ShipInfo>? = null
     )
 {
-   data class Builder(
+    fun toMap(): Map<String, String?> {
+        return mapOf(
+            "memail" to mEmail,
+            "mname" to mName,
+            "mpassword" to mPassword,
+            "mphone" to mPhone,
+            "musername" to mUsername,
+        )
+    }
+
+    data class Builder(
        private var mId : String? = null,
        private var mUsername : String? = null,
        private var mPhone : String? = null,

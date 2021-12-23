@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layout/itemlogin.xml" value="0.25" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/menu/menu_add.xml" value="0.2515625" />
+        <entry key="app/src/main/res/menu/menu_crud.xml" value="0.24769230769230768" />
       </map>
     </option>
   </component>
