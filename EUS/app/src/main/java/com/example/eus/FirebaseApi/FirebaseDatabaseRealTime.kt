@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.eus.ODT.Account
 import com.example.eus.ODT.Cart
 import com.example.eus.ODT.Product
+import com.example.eus.ODT.ShipInfo
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -344,5 +345,44 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
         database=Firebase.database.getReference("Cart").child(username).child(productId)
         database.removeValue()
 
+    }
+
+    override fun pushShipInfo(username: String, shipInfo: ShipInfo) {
+        database= Firebase.database.getReference("Accounts")
+        database.child(username).child("mshipInfos").child(shipInfo.id.toString()).setValue(shipInfo)
+    }
+
+    override fun updateShipInfo(username: String, shipInfo: ShipInfo) {
+        database= Firebase.database.getReference("Accounts")
+        database.child(username).child("mshipInfos").child(shipInfo.id.toString()).updateChildren(shipInfo.toMap())
+    }
+
+    override fun getShipInfo(username: String, idShipInfo: String): MutableLiveData<ShipInfo> {
+        var mutableLiveData: MutableLiveData<ShipInfo> = MutableLiveData()
+        database= Firebase.database.getReference("Accounts").child(username).child("mshipInfos")
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(shipSnapshot in snapshot.children){
+                        var ship = shipSnapshot.getValue(ShipInfo::class.java)
+                        if(ship?.id==idShipInfo){
+                            mutableLiveData.postValue(ship)
+                            break
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+    }
+
+    override fun removeShipInfo(username: String, idShipInfo: String) {
+        database= Firebase.database.getReference("Accounts")
+        database.child(username).child("mshipInfos").child(idShipInfo).removeValue()
     }
 }

@@ -209,5 +209,15 @@ class Util {
             }
             return MutableLiveData(shipInfos)
         }
+
+        fun fakeShipInfo(): ShipInfo{
+            var shipInfo= ShipInfo.Builder()
+                .addId("0")
+                .addAddress("Nguyen Van Cu")
+                .addName("HW")
+                .addPhone("0123456789")
+                .build()
+            return shipInfo
+        }
     }
 }

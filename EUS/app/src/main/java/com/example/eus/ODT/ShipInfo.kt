@@ -15,6 +15,15 @@ data class ShipInfo(
         parcel.readString(),
         parcel.readString()
     ) {
+
+    }
+    fun toMap(): Map<String, Any?>{
+        return mapOf(
+            "name" to name,
+            "address" to address,
+            "id" to id,
+            "phone" to phone
+        )
     }
 
     data class Builder(
