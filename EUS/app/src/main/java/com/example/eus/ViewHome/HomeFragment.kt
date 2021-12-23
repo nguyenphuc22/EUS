@@ -80,19 +80,14 @@ class HomeFragment : Fragment(), OnClickItemCategory, OnClickItemProduct{
         adapterProduct = AdapterProduct()
         adapterProduct.addOnClickItem(this)
         viewModel.getProduct()?.observe(viewLifecycleOwner, Observer {
-
+            Log.i("Home",it.size.toString())
             adapterProduct.setProduct( it )
-
-
-
         })
 
         binding.recyclerListProduct.layoutManager = GridLayoutManager(context,2)
         binding.recyclerListProduct.adapter = adapterProduct
 
         Log.i("well123", " this worked 1 " + sharedPref.getAccount(activity))
-
-//        viewModel.setUser(sharedPref.getAccount(activity).toString(), Util.fakeAccount())
     }
 
 

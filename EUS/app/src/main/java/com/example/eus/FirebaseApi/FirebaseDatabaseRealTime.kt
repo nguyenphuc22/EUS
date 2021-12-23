@@ -209,6 +209,7 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                         list.add(product!!)
                     }
                 }
+                Log.i("Firebase",list.size.toString())
                 mutableLiveData.postValue(list)
             }
 

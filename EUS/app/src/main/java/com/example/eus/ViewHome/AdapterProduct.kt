@@ -1,5 +1,6 @@
 package com.example.eus.ViewHome
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -41,10 +42,13 @@ class AdapterProduct : RecyclerView.Adapter<AdapterProduct.ProductViewHolder>() 
         return products.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setProduct(list : List<Product>) {
+        this.products = ArrayList()
         this.products = list as ArrayList<Product>
         notifyDataSetChanged()
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun addProduct(product: Product) {
         this.products.add(product)
         notifyDataSetChanged()
