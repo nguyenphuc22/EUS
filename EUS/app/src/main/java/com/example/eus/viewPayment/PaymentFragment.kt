@@ -98,6 +98,9 @@ class PaymentFragment : Fragment() , OnClickCart {
             viewModel.saveCache(products)
             this.findNavController().navigate(R.id.action_paymentFragment_to_changePaymentFragment)
         }
+        binding.includeTotalPrice.btnBuy.setOnClickListener {
+            this.findNavController().navigate(R.id.action_paymentFragment_to_stateDiaglog)
+        }
     }
 
     fun initView() {

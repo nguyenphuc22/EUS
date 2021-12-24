@@ -86,6 +86,9 @@ class DetailFragment : Fragment() {
             R.id.itemCart->{
                 this.findNavController().navigate(R.id.action_detailFragment_to_cartFragment)
             }
+            R.id.itemProfile -> {
+                this.findNavController().navigate(R.id.action_detailFragment_to_profileFragment)
+            }
 
         }
         return super.onOptionsItemSelected(item)

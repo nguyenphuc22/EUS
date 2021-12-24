@@ -146,6 +146,8 @@ class FirebaseDatabaseRealTime : FireApiDatabase {
                     accountTmp.postValue(account)
                     Log.i("TEST2", accountTmp.toString())
                 }
+                Log.i("Firebase_RealTime",account.toString())
+                Log.i("Firebase_RealTime",snapshot.value.toString())
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

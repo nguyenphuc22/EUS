@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_detailFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -141,6 +144,9 @@
             app:argType="com.example.eus.ODT.Product[]"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_paymentFragment_to_stateDiaglog"
+            app:destination="@id/stateDiaglog" />
     </fragment>
     <fragment
         android:id="@+id/changInfoFragment"
@@ -173,4 +179,12 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <dialog
+        android:id="@+id/stateDiaglog"
+        android:name="com.example.eus.viewPayment.StateDiaglog"
+        android:label="StateDiaglog" >
+        <action
+            android:id="@+id/action_stateDiaglog_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
 </navigation>
